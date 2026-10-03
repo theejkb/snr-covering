@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens : relevés dans la maquette SNR_Covering_dc.html
+   Aucune valeur de couleur, d'espacement ou de motion ne doit être écrite
+   en dur dans un composant : tout passe par ces tokens.
+   ========================================================================== */
+@theme {
+  /* Fonds */
+  --color-ink: #0a0a0b;
+  --color-ink-alt: #0e0e10;
+  --color-ink-deep: #060607; /* pied de page, seule surface plus sombre que le fond */
+  --color-card: #111114;
+
+  /* Lignes */
+  --color-line: #1a1b1e;
+  --color-line-card: #23252a;
+  --color-line-frame: #26282c; /* cadre de la photo d'atelier */
+  --color-line-field: #2a2c30; /* champs de saisie, pastilles, chips */
+  --color-line-strong: #35383d;
+
+  /* Texte */
+  --color-bright: #f2f3f5;
+  --color-soft: #e7e9ec;
+  --color-soft-2: #c3c7cc;
+  --color-soft-3: #c4c8cc; /* libellé « AVANT » du comparateur */
+  --color-muted: #a6abb2;
+  --color-muted-2: #9aa0a6;
+  --color-dim: #7d8288;
+  --color-dim-2: #6b7075;
+  --color-faint: #565b61;
+  --color-faint-2: #3a3d42; /* bandeau défilant, copyright */
+
+  /* Accents signature */
+  --color-blue: #4ab7e8;
+  --color-pink: #ff3d7f;
+
+  /* Typographie */
+  --font-display: var(--font-bebas), "Bebas Neue", Impact, sans-serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
+
+  /* Rayons */
+  --radius-btn: 2px;
+  --radius-field: 4px;
+  --radius-card: 8px;
+  --radius-badge: 10px;
+  --radius-frame: 12px;
+  --radius-pill: 20px;
+
+  /* Motion : courbe de la maquette, plus une courbe d'interaction.
+     `--ease-out` démarre vite et s'arrête net : c'est ce qui donne l'impression
+     que l'élément répond au doigt plutôt qu'il ne glisse. */
+  --ease-snr: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 400ms;
+  --duration-reveal: 800ms;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+/* Ces règles vont dans `@layer base`, et ce n'est pas cosmétique.
+   Tailwind v4 place ses utilitaires dans `@layer utilities` ; en CSS, une règle
+   SANS calque l'emporte toujours sur une règle calquée, quelle que soit la
+   spécificité. Hors calque, `a { color: inherit }` écrasait donc `text-ink` sur
+   tous les liens : les boutons blancs (`bg-bright text-ink`) affichaient un
+   texte blanc sur fond blanc : invisible, contraste 1:1. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-bright);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-pink);
+    color: var(--color-ink);
+  }
+
+  /* Focus clavier visible partout : absent de la maquette, ajouté pour l'a11y */
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: var(--font-sans);
+  }
+
+  /* #565b61 de la maquette tombait sous le seuil AA (~2,9:1) sur fond noir.
+     Remonté à #8b9096 (~4,6:1) pour rester lisible. */
+  input::placeholder,
+  textarea::placeholder {
+    color: #8b9096;
+  }
+}
+
+/* ==========================================================================
+   Signature : titres Bebas inclinés
+
+   Dans `@layer components`, et ce n'est pas un détail : hors calque, le
+   `margin: 0` de cette classe battrait n'importe quel utilitaire Tailwind
+   (`mb-5`, `mt-8`…), qui vivent dans `@layer utilities`. Les titres se
+   collaient alors au paragraphe suivant.
+   ========================================================================== */
+@layer components {
+  .h-display {
+    font-family: var(--font-display);
+    font-style: italic;
+    transform: skewX(-6deg);
+    transform-origin: left;
+    margin: 0;
+  }
+}
+
+/* ==========================================================================
+   Révélations au scroll
+   IMPORTANT : le contenu est VISIBLE par défaut. La classe `.js-reveal` n'est
+   posée sur <html> que par le script, après hydratation. Sans JavaScript, ou
+   si le script échoue, toute la page reste lisible et indexable.
+   (La maquette faisait l'inverse : .reveal { opacity: 0 } en dur.)
+   ========================================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.js-reveal .reveal {
+  opacity: 0;
+}
+
+.js-reveal .reveal.in {
+  animation: fadeUp var(--duration-reveal) var(--ease-snr) forwards;
+}
+
+/* ==========================================================================
+   Marquee
+   ========================================================================== */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Interactions
+   ========================================================================== */
+.presta-card {
+  transition:
+    transform var(--duration-slow) var(--ease-snr),
+    border-color var(--duration-slow);
+}
+.presta-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-blue);
+}
+/* L'accent en haut à droite s'allonge : le mouvement part du coin, il ne
+   surgit pas de nulle part. Transform uniquement, donc composé par le GPU. */
+.presta-card .accent {
+  transform: skewX(-16deg) scaleX(1);
+  transform-origin: right center;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+.presta-card:hover .accent {
+  transform: skewX(-16deg) scaleX(2.4);
+}
+
+.gal-item {
+  transition: transform var(--duration-slower) var(--ease-snr);
+}
+.gal-item:hover {
+  transform: scale(1.02);
+}
+/* La légende remonte de 4 px au survol : assez pour se sentir, pas assez pour
+   distraire. Le voile s'assombrit en même temps pour garder le texte lisible. */
+.gal-item .legende {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+.gal-item:hover .legende {
+  transform: translateY(-4px);
+}
+.gal-item .voile {
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+.gal-item:hover .voile {
+  opacity: 0.85;
+}
+
+.filter-tab {
+  cursor: pointer;
+  transition:
+    background-color var(--duration-base),
+    border-color var(--duration-base),
+    color var(--duration-base),
+    transform var(--duration-fast) var(--ease-out);
+}
+.filter-tab:hover {
+  transform: translateY(-1px);
+}
+.filter-tab:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Case de consentement.
+   La case native rendue par le navigateur est un carré blanc opaque : sur un
+   fond sombre elle pèse plus lourd que le bouton d'envoi juste au-dessus, alors
+   qu'elle doit rester discrète. Redessinée à la main, avec le trait de
+   validation en SVG au lieu d'une police. */
+.case-consentement {
+  appearance: none;
+  border: 1px solid var(--color-line-field);
+  border-radius: var(--radius-field);
+  background: transparent;
+  transition:
+    background-color var(--duration-fast),
+    border-color var(--duration-fast);
+}
+.case-consentement:hover {
+  border-color: var(--color-blue);
+}
+.case-consentement:checked {
+  border-color: var(--color-blue);
+  background-color: var(--color-blue);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='%230a0a0b'%3E%3Cpath d='M232.49 80.49l-128 128a12 12 0 01-17 0l-56-56a12 12 0 0117-17L96 183 215.51 63.51a12 12 0 0117 17z'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Ligne de contact : la pastille prend la couleur d'accent et se décale
+   légèrement vers le texte, comme si elle suivait le regard. */
+.contact-row .pastille {
+  transition:
+    border-color var(--duration-base),
+    color var(--duration-base),
+    transform var(--duration-slow) var(--ease-out);
+}
+.contact-row:hover .pastille {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   Motifs rayés : les emplacements photo de la maquette
+   Ce ne sont pas des décorations : c'est ce que la maquette affiche à la place
+   des photos, dans la galerie, le comparateur et le cadre de l'atelier. Elles
+   sont ici plutôt qu'en style inline parce qu'elles servent à sept endroits.
+   ========================================================================== */
+.stripe-gallery {
+  background: repeating-linear-gradient(135deg, #17181b, #17181b 14px, #111114 14px, #111114 28px);
+}
+.stripe-before {
+  background: repeating-linear-gradient(135deg, #26282c, #26282c 16px, #1e2023 16px, #1e2023 32px);
+}
+.stripe-after {
+  background: repeating-linear-gradient(135deg, #101012, #101012 16px, #0b0b0d 16px, #0b0b0d 32px);
+}
+.stripe-atelier {
+  background: repeating-linear-gradient(135deg, #141417, #141417 14px, #0f0f11 14px, #0f0f11 28px);
+}
+
+.nav-link {
+  position: relative;
+  transition: color var(--duration-base);
+}
+.nav-link:hover {
+  color: #fff;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  background: var(--color-pink);
+  transition: width 300ms;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+.btn-primary {
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow 300ms var(--ease-out);
+}
+/* La flèche avance de 3 px : le bouton indique où il mène. */
+.btn-primary .fleche {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.btn-primary:hover .fleche {
+  transform: translateX(3px);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 0.45);
+}
+/* Après `:hover`, et pas avant : au clic l'élément est aussi survolé, et à
+   spécificité égale c'est la dernière règle qui gagne. */
+.btn-primary:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Mouvement réduit : on remplace par un fondu court, on ne supprime pas tout
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  .js-reveal .reveal {
+    opacity: 1;
+  }
+  .js-reveal .reveal.in {
+    animation: none;
+  }
+  .presta-card:hover,
+  .gal-item:hover,
+  .gal-item:hover .legende,
+  .filter-tab:hover,
+  .contact-row:hover .pastille,
+  .btn-primary:hover,
+  .btn-primary:hover .fleche {
+    transform: none;
+  }
+  /* Pas `none` : l'accent doit garder son inclinaison au repos. */
+  .presta-card:hover .accent {
+    transform: skewX(-16deg) scaleX(1);
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 120ms !important;
+  }
+}
