@@ -42,9 +42,8 @@ export function Devis() {
             CE QUE VOUS VOULEZ
           </h2>
           <p className="mb-9 max-w-[420px] font-sans text-base leading-[1.7] text-muted">
-            Trois photos de votre voiture et deux lignes sur votre idée suffisent. On vous répond
-            avec un prix ferme{site.quoteDelay ? ` sous ${site.quoteDelay}` : ""}, sans relance
-            commerciale ensuite.
+            Quelques photos de votre véhicule et une description de votre idée suffisent. On vous
+            répond{site.quoteDelay ? ` sous ${site.quoteDelay}` : ""}.
           </p>
 
           <ul className="flex flex-col gap-[18px]">
@@ -67,11 +66,23 @@ export function Devis() {
               aide="Les chantiers en cours, au jour le jour"
               externe
             />
-            <Contact
-              icone={MapPinIcon}
-              valeur={`${site.city} et alentours`}
-              aide="Atelier sur rendez-vous"
-            />
+            {site.address ? (
+              <Contact
+                icone={MapPinIcon}
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  `${site.address.street}, ${site.address.postalCode} ${site.address.city}`,
+                )}`}
+                valeur={`${site.address.street}, ${site.address.postalCode} ${site.address.city}`}
+                aide="L'atelier, près de Grenoble"
+                externe
+              />
+            ) : (
+              <Contact
+                icone={MapPinIcon}
+                valeur={`${site.city} et alentours`}
+                aide="Atelier sur rendez-vous"
+              />
+            )}
           </ul>
         </div>
 
@@ -86,7 +97,7 @@ export function Devis() {
 /**
  * Une ligne de contact : icône encadrée, valeur, et une ligne d'aide qui dit
  * quand utiliser ce canal : c'est elle qui lève l'hésitation entre les quatre.
- * La dernière (la zone d'intervention) n'est pas un lien : rien à ouvrir.
+ * La dernière ouvre l'adresse de l'atelier dans Google Maps.
  */
 function Contact({
   icone: Icone,

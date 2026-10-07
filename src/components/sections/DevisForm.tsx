@@ -41,7 +41,7 @@ export function DevisForm() {
         </span>
         <p className="font-display text-[38px] leading-[.95] italic">C&apos;EST NOTÉ</p>
         <p className="mt-3 max-w-[300px] font-sans text-sm leading-[1.7] text-muted-2">
-          On regarde votre projet et on vous envoie un prix ferme sous 48 h. Si vous avez des
+          On regarde votre projet et on vous recontacte sous 48 h. Si vous avez des
           photos du véhicule, répondez simplement à notre email : c&apos;est ce qui nous permet
           d&apos;être précis du premier coup.
         </p>
@@ -54,7 +54,7 @@ export function DevisForm() {
       <div className="mb-1">
         <p className="font-display text-2xl text-bright italic">VOTRE DEVIS EN 2 MINUTES</p>
         <p className="mt-1 font-sans text-[12px] text-dim">
-          Cinq champs, pas de compte à créer, pas de rappel commercial.
+          Cinq champs, pas de compte à créer.
         </p>
       </div>
 

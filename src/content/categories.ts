@@ -1,5 +1,5 @@
 /**
- * Les cinq familles de prestation, isolées dans leur propre module.
+ * Les six familles de prestation, isolées dans leur propre module.
  *
  * Pourquoi ce fichier existe : cette liste est lue par le formulaire, qui est
  * un composant client. Tant qu'elle vivait dans `galerie.ts` : lequel valide
@@ -8,6 +8,13 @@
  *
  * Ce module ne doit donc jamais rien importer.
  */
-export const CATEGORIES = ["Covering", "PPF", "Déco", "Stickers", "Déchromage"] as const;
+export const CATEGORIES = [
+  "Covering",
+  "PPF",
+  "Kit déco",
+  "Stickers",
+  "Marquage",
+  "Déchromage",
+] as const;
 
 export type Categorie = (typeof CATEGORIES)[number];

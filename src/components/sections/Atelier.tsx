@@ -12,50 +12,64 @@ const encarts = [
 ];
 
 /**
- * L'atelier : maquette l. 306-330.
+ * L'atelier : maquette l. 306-330, texte fourni par Clarisse (« où me
+ * retrouver »).
  *
  * Photo à gauche, texte à droite. Le badge blanc déborde volontairement du
  * cadre en bas à droite : c'est la signature visuelle de la section, avec son
- * ombre portée. La photo est en portrait : recadrée au centre dans le cadre
- * 4/3, elle garde la poseuse et la roue.
+ * ombre portée. La photo est en portrait : recadrée dans le cadre 4/3, elle
+ * garde l'atelier et le véhicule en cours de pose.
  */
 export function Atelier() {
+  const ville = site.address?.city ?? site.city;
+
   return (
     <section id="atelier" className="scroll-mt-20 py-[110px]">
       <Container className="grid items-center gap-14 lg:grid-cols-2">
         <div className="relative">
           <div className="stripe-atelier relative aspect-[4/3] overflow-hidden rounded-frame border border-line-frame">
             <Image
-              src="/images/realisations/atelier-snr-covering-pose.jpg"
-              alt="Pose de film sur une berline noire à l'atelier SNR Covering, roue avant démontée"
+              src="/images/realisations/toyota-yaris-kit-deco-genshin-impact.jpg"
+              alt="L'atelier partagé de Sassenage, une Toyota Yaris en cours de covering imprimé"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover object-[50%_60%]"
+              className="object-cover object-[50%_45%]"
             />
           </div>
 
           <div className="absolute -right-4 -bottom-6 rounded-badge bg-bright px-[26px] py-5 text-ink shadow-[0_20px_40px_rgb(0_0_0/.4)]">
-            <p className="font-display text-[38px] leading-[.9] italic">{site.city.toUpperCase()}</p>
-            <p className="font-sans text-[11px] font-semibold tracking-[.08em]">&amp; ALENTOURS</p>
+            <p className="font-display text-[38px] leading-[.9] italic">{ville.toUpperCase()}</p>
+            <p className="font-sans text-[11px] font-semibold tracking-[.08em]">
+              &amp; PARTOUT EN FRANCE
+            </p>
           </div>
         </div>
 
         <div>
-          <Eyebrow>L&apos;ATELIER</Eyebrow>
+          <Eyebrow>OÙ ME RETROUVER</Eyebrow>
           <h2 className="h-display mb-[22px] text-[clamp(40px,6vw,72px)] leading-[.9]">
             L&apos;ATELIER
             <br />
-            DE {site.city.toUpperCase()}
+            PRÈS DE {site.city.toUpperCase()}
           </h2>
           <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
-            {site.name} est un atelier indépendant installé à {site.city}. Un seul véhicule à la
-            fois : celui qui est chez nous a toute la place, et personne ne pose dans la
-            précipitation pour libérer le pont.
+            {site.name} est installé dans un grand atelier situé à {ville}, près de {site.city},
+            partagé avec trois autres poseurs professionnels. Un espace pensé pour travailler dans
+            de bonnes conditions, accueillir les véhicules et réaliser des projets de toutes tailles,
+            de la petite personnalisation au covering complet.
           </p>
-          <p className="mb-[30px] font-sans text-base leading-[1.85] text-muted">
+          <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
+            Plusieurs savoir-faire réunis au même endroit, et la possibilité de collaborer sur
+            certains projets. Lorsque le projet le nécessite, j&apos;interviens aussi directement
+            sur site, en déplacement partout en France.
+          </p>
+          <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
             Du simple sticker au covering complet, on travaille sur voitures, utilitaires et
-            deux-roues, à {site.city} et dans toute l&apos;{site.department}. Si votre carrosserie
-            ne se prête pas à la pose, on vous le dit avant de prendre votre argent.
+            deux-roues, à {site.city} et dans toute l&apos;{site.department}.
+          </p>
+          <p className="mb-[30px] font-sans text-base leading-[1.85] font-semibold text-bright">
+            Un atelier, plusieurs savoir-faire, et surtout une même exigence : un résultat propre et
+            professionnel.
           </p>
 
           <ul className="flex flex-wrap gap-3.5">

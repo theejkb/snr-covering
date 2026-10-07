@@ -5,11 +5,12 @@ import { Container } from "../ui/Container";
 import { Eyebrow } from "../ui/Eyebrow";
 
 /**
- * Grille des cinq prestations + la carte d'appel : maquette l. 139-188.
+ * Grille des six prestations + la carte d'appel : maquette l. 139-188.
  *
  * Les cartes de prestation ne sont pas cliquables, comme dans la maquette :
- * il n'y a nulle part où aller en une page. Seule la sixième, la carte claire,
- * est un lien vers le formulaire.
+ * il n'y a nulle part où aller en une page. Seule la dernière, la carte claire,
+ * est un lien vers le formulaire. Avec six prestations, elle prend toute la
+ * largeur de la dernière ligne au lieu d'y rester seule dans un coin.
  */
 export function Prestations() {
   return (
@@ -23,7 +24,7 @@ export function Prestations() {
             </h2>
           </div>
           <p className="max-w-[320px] font-sans text-sm leading-[1.6] text-dim md:text-right">
-            Cinq prestations, toutes réversibles : votre peinture d&apos;origine reste intacte
+            Six prestations, toutes réversibles : votre peinture d&apos;origine reste intacte
             dessous.
           </p>
         </div>
@@ -61,14 +62,14 @@ export function Prestations() {
             </li>
           ))}
 
-          <li>
+          <li className="sm:col-span-2 lg:col-span-3">
             <Link
               href="#devis"
               className="presta-card group flex h-full flex-col justify-between rounded-card bg-bright px-[30px] py-[34px] text-ink"
             >
               <p className="font-sans text-base leading-[1.5] font-bold italic">
                 Vous hésitez entre deux finitions ?<br />
-                Envoyez trois photos, on vous dit ce qui rend le mieux sur votre modèle.
+                Envoyez quelques photos, on vous dit ce qui rend le mieux sur votre modèle.
               </p>
               <span className="mt-6 inline-flex items-center gap-2.5 font-display text-[32px] italic">
                 PARLONS-EN

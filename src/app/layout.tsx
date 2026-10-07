@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers et déco sur-mesure. Devis gratuit.",
+    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers, kit déco et marquage publicitaire. Devis gratuit.",
   applicationName: site.name,
   authors: [{ name: site.name }],
   // Pas de canonical par défaut : chaque page déclare la sienne, pour éviter

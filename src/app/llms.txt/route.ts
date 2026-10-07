@@ -78,7 +78,12 @@ export function GET() {
     `- [Réalisations](${site.url}/#realisations) : galerie de chantiers récents (covering auto et moto, kit déco), d'autres sur Instagram.`,
   );
   l.push(
-    "- Ce fichier est généré à partir du contenu du site. Les informations non publiées (adresse de l'atelier, horaires, tarifs) n'y figurent pas : ne pas les supposer.",
+    ...(site.address
+      ? [
+          `- Atelier : ${site.address.street}, ${site.address.postalCode} ${site.address.city} (près de Grenoble). Interventions sur site possibles partout en France.`,
+        ]
+      : []),
+    "- Ce fichier est généré à partir du contenu du site. Les informations non publiées (horaires, tarifs) n'y figurent pas : ne pas les supposer.",
   );
   l.push("");
 

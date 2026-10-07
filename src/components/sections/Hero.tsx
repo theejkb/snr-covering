@@ -40,13 +40,13 @@ export function Hero() {
           </div>
 
           {/*
-            La maquette écrit `clamp(64px, 8.4vw, 132px)`. Le plancher est
-            abaissé à 48px : au-dessus de 762px de large c'est `8.4vw` qui
-            gouverne, donc le rendu est identique à la maquette sur tout le
-            desktop ; en dessous, 64px feraient déborder « VOTRE VOITURE, ».
+            La maquette écrit `clamp(64px, 8.4vw, 132px)` pour « VOTRE VOITURE, ».
+            « VOTRE VÉHICULE, » est plus long : à cette taille il passait sur
+            deux lignes dans la colonne du desktop. Réduit d'environ un quart
+            pour tenir sur une ligne à toutes les largeurs.
           */}
-          <h1 className="h-display text-[clamp(48px,8.4vw,132px)] leading-[.8]">
-            <span className="reveal in block">VOTRE VOITURE,</span>
+          <h1 className="h-display text-[clamp(40px,6.2vw,100px)] leading-[.8]">
+            <span className="reveal in block">VOTRE VÉHICULE,</span>
             <span className="reveal in block" style={{ animationDelay: ".1s" }}>
               UNE AUTRE
             </span>
@@ -59,9 +59,9 @@ export function Hero() {
             className="reveal in mt-8 mb-[34px] max-w-[460px] font-sans text-[16.5px] leading-[1.75] text-muted"
             style={{ animationDelay: ".2s", textWrap: "pretty" }}
           >
-            Changez la couleur de votre voiture sans toucher à la peinture d&apos;origine. Films
-            posés à la main dans notre atelier de {site.city}, et retirables le jour où vous changez
-            d&apos;avis.
+            Changez la couleur de votre véhicule sans toucher à la peinture d&apos;origine. Films
+            posés à la main dans notre atelier près de {site.city}, et retirables le jour où vous
+            changez d&apos;avis.
           </p>
 
           <div
@@ -85,7 +85,7 @@ export function Hero() {
             style={{ animationDelay: ".35s" }}
           >
             Gratuit, sans engagement
-            {site.quoteDelay ? `, réponse sous ${site.quoteDelay}` : ""}. Trois photos suffisent.
+            {site.quoteDelay ? `, réponse sous ${site.quoteDelay}` : ""}. Quelques photos suffisent.
           </p>
         </div>
 
@@ -125,7 +125,9 @@ export function Hero() {
       {stats.length > 0 && (
         <Container className="relative z-[2] bg-ink">
           <dl
-            className="reveal in mt-16 grid grid-cols-2 border-t border-line md:grid-cols-4"
+            className={`reveal in mt-16 grid grid-cols-2 border-t border-line ${
+              stats.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"
+            }`}
             style={{ animationDelay: ".4s" }}
           >
             {stats.map((s, i) => (

@@ -19,7 +19,7 @@ export const site = {
    */
   indexable: process.env.NEXT_PUBLIC_SITE_INDEXABLE === "true",
   description:
-    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers et déco sur-mesure.",
+    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers, kit déco et marquage publicitaire.",
   city: "Grenoble",
   department: "Isère",
   /**
@@ -27,7 +27,7 @@ export const site = {
    * porté par `department` et balisé en `AdministrativeArea`. Le typer en
    * `City` dans le JSON-LD était une erreur factuelle.
    */
-  areaServed: ["Grenoble", "Échirolles", "Saint-Martin-d'Hères", "Voiron", "Vizille"],
+  areaServed: ["Grenoble", "Sassenage", "Échirolles", "Saint-Martin-d'Hères", "Voiron", "Vizille"],
   email: "Covering.snr@gmail.com",
   phone: "07 82 75 83 16",
   phoneE164: "+33782758316",
@@ -39,12 +39,20 @@ export const site = {
    * le balisage bascule alors sur `areaServed` seul, ce qui reste valide pour
    * Google. Ne jamais inventer une adresse pour "faire du local".
    */
-  address: null as null | {
+  address: {
+    street: "2 chemin du Bac",
+    postalCode: "38360",
+    city: "Sassenage",
+    // Coordonnées GPS : à renseigner avec la position exacte de l'atelier
+    // (clic droit sur Google Maps). Sans elles, le balisage omet `geo`.
+    lat: null,
+    lng: null,
+  } as null | {
     street: string;
     postalCode: string;
     city: string;
-    lat: number;
-    lng: number;
+    lat: number | null;
+    lng: number | null;
   },
 
   /** TODO : horaires réels, ou laisser vide pour ne rien afficher */
@@ -60,17 +68,15 @@ export const site = {
   },
 
   /**
-   * Chiffres affichés dans le hero : repris de la maquette
-   * (`state.n1 = 100`, `n2 = 5`, `n3 = 3`, puis « 48 h » en dur).
+   * Chiffres affichés dans le hero. La garantie films a été retirée à la
+   * demande de Clarisse : elle figure sur la facture, pas sur le site.
    *
-   * ⚠️ « 3 ans de garantie » et « 48 h » sont des ENGAGEMENTS COMMERCIAUX.
-   * Ils sont affichés parce que la maquette les affiche. Mettre une valeur à
-   * `null` retire proprement la statistique de la grille.
+   * ⚠️ « 48 h » est un ENGAGEMENT COMMERCIAL. Mettre une valeur à `null`
+   * retire proprement la statistique de la grille.
    */
   stats: [
     { value: "100", label: "Sur-mesure", suffix: "%" },
-    { value: "5", label: "Prestations" },
-    { value: "3", label: "Garantie films", suffix: " ans" },
+    { value: "6", label: "Prestations" },
     { value: "48 h", label: "Devis envoyé" },
   ] as { value: string | null; label: string; suffix?: string }[],
 

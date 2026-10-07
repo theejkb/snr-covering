@@ -70,11 +70,15 @@ export function businessSchema() {
             addressLocality: site.address.city,
             addressCountry: "FR",
           },
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: site.address.lat,
-            longitude: site.address.lng,
-          },
+          ...(site.address.lat !== null && site.address.lng !== null
+            ? {
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: site.address.lat,
+                  longitude: site.address.lng,
+                },
+              }
+            : {}),
         }
       : {}),
     ...(site.openingHours.length

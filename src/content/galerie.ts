@@ -9,8 +9,9 @@ import { CATEGORIES } from "./categories";
  * la redirection `/realisations/:slug` de next.config.ts passe avant les
  * fichiers statiques et renverrait chaque photo vers l'accueil.
  *
- * `span: 2` occupe deux colonnes. Avec six tuiles dont deux larges, en 1ʳᵉ et
- * 5ᵉ position, la grille de 4 colonnes forme deux lignes pleines.
+ * `span: 2` occupe deux colonnes. Avec cinq tuiles dont trois larges (1ʳᵉ,
+ * 4ᵉ et 5ᵉ), la grille de 4 colonnes forme deux lignes pleines. En ajouter :
+ * garder un total de colonnes multiple de 4.
  *
  * Les photos sont surtout en portrait alors que les tuiles sont plutôt
  * larges : `object-cover` recadre au centre, ce qui garde le véhicule.
@@ -18,6 +19,8 @@ import { CATEGORIES } from "./categories";
 const tuileSchema = z.object({
   title: z.string().min(1),
   cat: z.enum(CATEGORIES),
+  /** Libellé affiché à la place de la catégorie, quand il est plus précis */
+  label: z.string().optional(),
   span: z.union([z.literal(1), z.literal(2)]),
   photo: z.object({
     src: z.string().startsWith("/images/realisations/"),
@@ -69,35 +72,26 @@ const data: Tuile[] = [
   },
   {
     title: "Supermotard noir mat",
-    cat: "Covering",
-    span: 1,
+    cat: "Kit déco",
+    span: 2,
     photo: {
       src: "/images/realisations/supermotard-covering-noir-mat.jpg",
-      alt: "Moto supermotard en covering intégral noir mat, garée devant une façade",
+      alt: "Moto supermotard habillée d'un kit déco noir mat, garée devant une façade",
       width: 1138,
       height: 2000,
+      position: "50% 58%",
     },
   },
   {
     title: "Itasha Genshin Impact",
-    cat: "Déco",
+    cat: "Covering",
+    label: "Covering imprimé",
     span: 2,
     photo: {
       src: "/images/realisations/toyota-yaris-kit-deco-genshin-impact.jpg",
-      alt: "Pose d'un kit déco intégral Genshin Impact sur une Toyota Yaris blanche, en cours à l'atelier",
+      alt: "Pose d'un covering imprimé Genshin Impact sur une Toyota Yaris blanche, en cours à l'atelier",
       width: 1500,
       height: 2000,
-    },
-  },
-  {
-    title: "Film chrome vert",
-    cat: "Covering",
-    span: 1,
-    photo: {
-      src: "/images/realisations/pose-film-chrome-vert-garde-boue.jpg",
-      alt: "Garde-boue en cours de covering avec un film chrome vert émeraude",
-      width: 2000,
-      height: 1500,
     },
   },
 ];

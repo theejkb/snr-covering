@@ -1,7 +1,14 @@
 import { site } from "@/config/site";
 
-/** Les cinq libellés de la maquette, dans l'ordre. */
-const labels = ["COVERING FULL", "PPF PROTECTION", "DÉCHROMAGE", "KIT DÉCO PERSO", "STICKERS"];
+/** Les cinq libellés de la maquette, dans l'ordre, puis le marquage publicitaire. */
+const labels = [
+  "COVERING FULL",
+  "PPF PROTECTION",
+  "DÉCHROMAGE",
+  "KIT DÉCO PERSO",
+  "STICKERS",
+  "MARQUAGE PUBLICITAIRE",
+];
 
 /**
  * Bande défilante, décorative : `aria-hidden`, arrêtée sous

@@ -33,12 +33,12 @@ const data: Prestation[] = [
     number: "01",
     cardTitle: ["COVERING", "SEMI & FULL"],
     cardExcerpt:
-      "Mat, satiné, brillant ou brossé : votre voiture change de couleur en quelques jours. Le film se retire, la teinte d'origine réapparaît, et votre valeur de revente avec.",
+      "Mat, satiné, brillant ou texturé : votre véhicule change de couleur en quelques jours. Le film se retire, la teinte d'origine réapparaît, et votre valeur de revente avec.",
     accent: "blue",
     h1: "Covering voiture à Grenoble",
     metaTitle: "Covering voiture à Grenoble · SNR Covering",
     metaDescription:
-      "Covering total ou partiel à Grenoble : films mats, brillants, satinés ou brossés, posés à la main. Réversible, sans abîmer la peinture. Devis gratuit.",
+      "Covering total ou partiel à Grenoble : films mats, brillants, satinés ou texturés, posés à la main. Réversible, sans abîmer la peinture. Devis gratuit.",
     eyebrow: "Prestation 01",
     intro:
       "Le covering consiste à recouvrir la carrosserie d'un film adhésif de couleur. Votre voiture change d'apparence sans passer par la peinture, et l'opération reste réversible : le film se retire, la teinte d'origine réapparaît.",
@@ -55,7 +55,7 @@ const data: Prestation[] = [
         paragraphs: [
           "Le mat absorbe la lumière et durcit les lignes du véhicule. Il demande un peu plus d'attention à l'entretien : les traces de doigts et les projections se voient davantage que sur un brillant.",
           "Le satiné se situe entre les deux. C'est la finition la plus polyvalente, celle qui pardonne le mieux les défauts d'entretien tout en gardant un rendu contemporain.",
-          "Le brillant imite la peinture et se nettoie comme elle. Le brossé, le carbone et les teintes caméléon relèvent d'une démarche plus affirmée, généralement réservée à des éléments partiels.",
+          "Le brillant imite la peinture et se nettoie comme elle. Les films texturés, comme le carbone, et les teintes caméléon relèvent d'une démarche plus affirmée, généralement réservée à des éléments partiels.",
         ],
       },
       {
@@ -167,7 +167,7 @@ const data: Prestation[] = [
     number: "03",
     cardTitle: ["KIT DÉCO", "PERSO"],
     cardExcerpt:
-      "Bandes racing, numéros, logos de sponsors. On vous montre le rendu sur votre modèle avant de découper quoi que ce soit.",
+      "Une création unique, pensée selon vos envies. Couleurs, motifs, logos, texture : vous choisissez chaque détail, et le kit est conçu sur mesure pour votre véhicule.",
     accent: "blue",
     h1: "Kit déco personnalisé pour véhicule",
     metaTitle: "Kit déco personnalisé véhicule · SNR Covering Grenoble",
@@ -175,7 +175,7 @@ const data: Prestation[] = [
       "Création et pose de kits déco sur-mesure à Grenoble : bandes racing, motifs, numéros, logos de sponsors. Conception avec vous, pose à l'atelier.",
     eyebrow: "Prestation 03",
     intro:
-      "Un kit déco, c'est un habillage graphique dessiné pour un véhicule précis. On part de votre idée, on la met en forme sur le gabarit de votre modèle, et on pose une fois le visuel validé.",
+      "Un kit déco 100 % personnalisé, c'est une création unique, pensée selon vos envies. Vous choisissez les couleurs, les motifs, les logos, la texture et chaque détail du design. Le kit est ensuite conçu sur mesure pour s'adapter parfaitement à votre véhicule.",
     sections: [
       {
         heading: "De l'idée au gabarit",
@@ -230,7 +230,7 @@ const data: Prestation[] = [
     number: "04",
     cardTitle: ["STICKERS", undefined],
     cardExcerpt:
-      "Votre fourgon travaille pour vous à chaque déplacement. Logo, coordonnées, numéro de course : découpe et pose au millimètre, à l'unité comme en série.",
+      "Des stickers 100 % personnalisés, créés selon vos envies et votre identité. Logo, texte, motif, numéro de course ou design complet : chacun est réalisé sur mesure pour son support.",
     accent: "pink",
     h1: "Stickers et lettrage véhicule à Grenoble",
     metaTitle: "Stickers et lettrage véhicule · SNR Covering Grenoble",
@@ -238,7 +238,7 @@ const data: Prestation[] = [
       "Découpe et pose de stickers et lettrage adhésif à Grenoble : logos, textes, numéros. À l'unité ou en série, pour véhicules et vitrines.",
     eyebrow: "Prestation 04",
     intro:
-      "Un sticker bien découpé et bien posé, c'est ce qui sépare un marquage propre d'un autocollant qui gondole. On travaille la découpe au plotter et la pose à la main, à l'unité comme en série.",
+      "Des stickers 100 % personnalisés, créés selon vos envies et votre identité. Logo, texte, motif, couleur, numéro de course, coordonnées ou design complet : chaque sticker est réalisé sur mesure pour s'adapter à votre projet et au support souhaité.",
     sections: [
       {
         heading: "Découpe vectorielle ou impression",
@@ -288,17 +288,64 @@ const data: Prestation[] = [
     ],
   },
   {
-    slug: "dechromage-grenoble",
+    slug: "marquage-publicitaire",
     number: "05",
+    cardTitle: ["MARQUAGE", "PUBLICITAIRE"],
+    cardExcerpt:
+      "Vos véhicules, vitrines et enseignes deviennent de vrais outils de communication. Logo, coordonnées, slogan, visuels : chaque projet suit votre identité.",
+    accent: "blue",
+    h1: "Marquage publicitaire à Grenoble",
+    metaTitle: "Marquage publicitaire à Grenoble · SNR Covering",
+    metaDescription:
+      "Marquage publicitaire à Grenoble : véhicules, vitrines et enseignes habillés à votre identité. Logo, coordonnées, slogan, visuels. Devis gratuit.",
+    eyebrow: "Prestation 05",
+    intro:
+      "Le marquage publicitaire permet de transformer vos véhicules, vitrines, enseignes ou autres supports en véritables outils de communication.",
+    sections: [
+      {
+        heading: "Un projet à votre image",
+        paragraphs: [
+          "Logo, coordonnées, slogan, visuels… chaque projet est personnalisé selon votre identité et vos besoins, pour une communication visible et professionnelle.",
+        ],
+      },
+      {
+        heading: "Véhicules, vitrines, enseignes",
+        paragraphs: [
+          "Utilitaire, véhicule de société, poids lourd, vitrine de commerce ou enseigne : le marquage s'adapte au support, du simple logo sur une portière à l'habillage complet.",
+        ],
+      },
+    ],
+    forWho: [
+      "Entreprise ou artisan qui veut rendre ses véhicules visibles",
+      "Commerce qui veut habiller sa vitrine ou son enseigne",
+      "Flotte de véhicules à marquer à l'identique",
+    ],
+    duration: null,
+    faq: [
+      {
+        question: "Faut-il fournir les fichiers du logo ?",
+        answer:
+          "C'est l'idéal : un fichier vectoriel donne un rendu net à n'importe quelle taille. À partir d'une image basse résolution, il faut d'abord la redessiner. C'est faisable, cela demande simplement du temps.",
+      },
+      {
+        question: "Peut-on marquer plusieurs véhicules à l'identique ?",
+        answer:
+          "Oui. Un gabarit d'alignement permet de reproduire exactement le même marquage sur chaque véhicule de la flotte.",
+      },
+    ],
+  },
+  {
+    slug: "dechromage-grenoble",
+    number: "06",
     cardTitle: ["DÉCHROMAGE", undefined],
     cardExcerpt:
-      "Les entourages de vitres chromés sont ce qui date le plus une voiture. On les passe en noir mat ou brillant, et on peut revenir en arrière.",
+      "Les entourages de vitres chromés sont ce qui date le plus un véhicule. On les passe en noir mat ou brillant, et on peut revenir en arrière.",
     accent: "blue",
     h1: "Déchromage à Grenoble",
     metaTitle: "Déchromage à Grenoble · SNR Covering",
     metaDescription:
       "Déchromage de véhicule à Grenoble : calandre, entourages de vitres, baguettes et logos passés en noir mat ou brillant. Réversible, sans peinture.",
-    eyebrow: "Prestation 05",
+    eyebrow: "Prestation 06",
     intro:
       "Le déchromage supprime les éléments brillants d'un véhicule en les recouvrant d'un film noir. La silhouette se durcit, les volumes se lisent différemment, et l'opération reste réversible puisqu'on ne peint rien.",
     sections: [

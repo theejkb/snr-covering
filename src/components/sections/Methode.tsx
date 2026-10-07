@@ -4,36 +4,42 @@ import { Container } from "../ui/Container";
 import { Eyebrow } from "../ui/Eyebrow";
 import { ButtonLink } from "../ui/Button";
 
-/** Les quatre étapes de la maquette (l. 256-299), textes et délais compris. */
+/**
+ * Les quatre étapes de la maquette (l. 256-299). Le devis est envoyé après le
+ * passage à l'atelier, une fois le film choisi : c'est l'étape 02 qui porte
+ * les deux délais, l'étape 01 n'en a pas.
+ */
 const etapes = [
   {
     n: "01",
     titre: "ON EN PARLE",
-    texte:
-      "Vous envoyez quelques photos du véhicule et votre idée. On vous conseille, puis vous recevez un devis clair.",
-    delai: site.quoteDelay ? `DEVIS SOUS ${site.quoteDelay.toUpperCase()}` : "DEVIS GRATUIT",
+    texte: "Vous envoyez quelques photos du véhicule et votre idée. On vous conseille.",
+    delais: [] as string[],
     accent: "blue" as const,
   },
   {
     n: "02",
     titre: "ON CHOISIT LE FILM",
     texte:
-      "Rendez-vous à l'atelier : on compare teintes et finitions, échantillons en main, sur votre carrosserie.",
-    delai: "1 H SUR PLACE",
+      "Rendez-vous à l'atelier : on compare teintes et finitions, échantillons en main, sur votre véhicule. Puis vous recevez un devis clair.",
+    delais: [
+      "1 H SUR PLACE",
+      site.quoteDelay ? `DEVIS SOUS ${site.quoteDelay.toUpperCase()}` : "DEVIS GRATUIT",
+    ],
     accent: "pink" as const,
   },
   {
     n: "03",
     titre: "ON POSE",
     texte: "Le véhicule reste à l'atelier, préparation, démontage, pose au millimètre, remontage.",
-    delai: "1 À 5 JOURS SELON LA PRESTATION",
+    delais: ["1 À 5 JOURS SELON LA PRESTATION"],
     accent: "blue" as const,
   },
   {
     n: "04",
     titre: "VOUS REPARTEZ",
     texte: "On fait le tour du véhicule ensemble et on vous donne les bons gestes d'entretien.",
-    delai: "48 H SANS LAVAGE",
+    delais: ["1 MOIS SANS LAVAGE AU KARCHER"],
     accent: "pink" as const,
   },
 ];
@@ -86,18 +92,24 @@ export function Methode() {
                 <p className="mt-2.5 max-w-[520px] font-sans text-[14.5px] leading-[1.75] text-muted-2">
                   {e.texte}
                 </p>
-                <p className="mt-3.5 inline-flex items-center gap-[9px]">
-                  <span
-                    aria-hidden
-                    className={`h-[3px] w-[18px] shrink-0 ${
-                      e.accent === "blue" ? "bg-blue" : "bg-pink"
-                    }`}
-                    style={{ transform: "skewX(-16deg)" }}
-                  />
-                  <span className="font-sans text-[11px] font-bold tracking-[.14em] text-soft-2">
-                    {e.delai}
-                  </span>
-                </p>
+                {e.delais.length > 0 && (
+                  <div className="mt-3.5 flex flex-wrap gap-x-6 gap-y-2">
+                    {e.delais.map((d) => (
+                      <p key={d} className="inline-flex items-center gap-[9px]">
+                        <span
+                          aria-hidden
+                          className={`h-[3px] w-[18px] shrink-0 ${
+                            e.accent === "blue" ? "bg-blue" : "bg-pink"
+                          }`}
+                          style={{ transform: "skewX(-16deg)" }}
+                        />
+                        <span className="font-sans text-[11px] font-bold tracking-[.14em] text-soft-2">
+                          {d}
+                        </span>
+                      </p>
+                    ))}
+                  </div>
+                )}
               </div>
             </li>
           ))}

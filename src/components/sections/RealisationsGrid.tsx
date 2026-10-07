@@ -99,7 +99,7 @@ export function RealisationsGrid({
             />
             <div className="legende absolute bottom-3.5 left-4 z-[2]">
               <p className="font-sans text-[10px] font-bold tracking-[.12em] text-muted-2 uppercase">
-                {g.cat}
+                {g.label ?? g.cat}
               </p>
               <h3 className="font-display text-[22px] leading-none text-bright italic">{g.title}</h3>
             </div>
