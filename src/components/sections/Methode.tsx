@@ -86,7 +86,7 @@ export function Methode() {
                 {e.n}
               </span>
               <div>
-                <h3 className="font-display text-[34px] leading-[.95] text-bright italic">
+                <h3 className="font-display text-[28px] leading-[.95] text-bright italic sm:text-[34px]">
                   {e.titre}
                 </h3>
                 <p className="mt-2.5 max-w-[520px] font-sans text-[14.5px] leading-[1.75] text-muted-2">

@@ -36,7 +36,7 @@ export function Devis() {
       <Container className="relative z-[2] grid gap-[60px] lg:grid-cols-2">
         <div>
           <Eyebrow>PARLONS DE VOTRE VÉHICULE</Eyebrow>
-          <h2 className="h-display mb-6 text-[clamp(44px,7vw,88px)] leading-[.85]">
+          <h2 className="h-display mb-6 text-[clamp(40px,7vw,88px)] leading-[.85] lg:text-[clamp(40px,5.8vw,88px)]">
             DITES-NOUS
             <br />
             CE QUE VOUS VOULEZ

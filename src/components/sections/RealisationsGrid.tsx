@@ -101,7 +101,7 @@ export function RealisationsGrid({
               <p className="font-sans text-[10px] font-bold tracking-[.12em] text-muted-2 uppercase">
                 {g.label ?? g.cat}
               </p>
-              <h3 className="font-display text-[22px] leading-none text-bright italic">{g.title}</h3>
+              <h3 className="font-display text-[18px] leading-none text-bright italic sm:text-[22px]">{g.title}</h3>
             </div>
           </li>
         ))}

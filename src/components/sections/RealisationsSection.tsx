@@ -18,7 +18,7 @@ export function RealisationsSection() {
         <RealisationsGrid tuiles={galerie}>
           <div>
             <Eyebrow>NOS RÉALISATIONS</Eyebrow>
-            <h2 className="h-display text-[clamp(42px,7vw,80px)] leading-[.9]">
+            <h2 className="h-display text-[clamp(26px,7vw,80px)] leading-[.9]">
               RÉALISATIONS À {site.city.toUpperCase()}
             </h2>
           </div>

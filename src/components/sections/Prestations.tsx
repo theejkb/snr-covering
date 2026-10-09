@@ -19,7 +19,7 @@ export function Prestations() {
         <div className="mb-11 flex flex-wrap items-end justify-between gap-5">
           <div>
             <Eyebrow>NOS SERVICES</Eyebrow>
-            <h2 className="h-display text-[clamp(42px,7vw,80px)] leading-[.9]">
+            <h2 className="h-display text-[clamp(26px,7vw,80px)] leading-[.9]">
               PRESTATIONS COVERING &amp; PPF
             </h2>
           </div>

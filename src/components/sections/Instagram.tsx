@@ -26,7 +26,7 @@ export async function Instagram() {
         <div className="mb-[38px] flex flex-wrap items-end justify-between gap-5">
           <div>
             <Eyebrow>EN DIRECT DE L&apos;ATELIER</Eyebrow>
-            <h2 className="h-display text-[clamp(36px,6vw,72px)] leading-[.9]">
+            <h2 className="h-display text-[clamp(28px,6vw,72px)] leading-[.9]">
               ÇA SE PASSE SUR INSTAGRAM
             </h2>
           </div>

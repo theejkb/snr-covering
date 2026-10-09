@@ -12,13 +12,14 @@ const encarts = [
 ];
 
 /**
- * L'atelier : maquette l. 306-330, texte fourni par Clarisse (« où me
- * retrouver »).
+ * Clarisse et son atelier, en une seule section : maquette l. 306-330 pour la
+ * mise en page, textes fournis par Clarisse (sa présentation et « où me
+ * retrouver »), resserrés pour tenir dans une colonne.
  *
  * Photo à gauche, texte à droite. Le badge blanc déborde volontairement du
  * cadre en bas à droite : c'est la signature visuelle de la section, avec son
- * ombre portée. La photo est en portrait : recadrée dans le cadre 4/3, elle
- * garde l'atelier et le véhicule en cours de pose.
+ * ombre portée. La photo est en portrait : recadrée dans le cadre, elle garde
+ * Clarisse et la roue.
  */
 export function Atelier() {
   const ville = site.address?.city ?? site.city;
@@ -27,13 +28,13 @@ export function Atelier() {
     <section id="atelier" className="scroll-mt-20 py-[110px]">
       <Container className="grid items-center gap-14 lg:grid-cols-2">
         <div className="relative">
-          <div className="stripe-atelier relative aspect-[4/3] overflow-hidden rounded-frame border border-line-frame">
+          <div className="stripe-atelier relative aspect-[4/5] overflow-hidden rounded-frame border border-line-frame">
             <Image
-              src="/images/realisations/toyota-yaris-kit-deco-genshin-impact.jpg"
-              alt="L'atelier partagé de Sassenage, une Toyota Yaris en cours de covering imprimé"
+              src="/images/realisations/atelier-snr-covering-pose.jpg"
+              alt="Clarisse en pleine pose sur une berline noire, à l'atelier de Sassenage"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover object-[50%_45%]"
+              className="object-cover object-[45%_50%]"
             />
           </div>
 
@@ -46,31 +47,32 @@ export function Atelier() {
         </div>
 
         <div>
-          <Eyebrow>OÙ ME RETROUVER</Eyebrow>
+          <Eyebrow>QUI SE CACHE DERRIÈRE {site.name.toUpperCase()} ?</Eyebrow>
           <h2 className="h-display mb-[22px] text-[clamp(40px,6vw,72px)] leading-[.9]">
-            L&apos;ATELIER
-            <br />
-            PRÈS DE {site.city.toUpperCase()}
+            MOI, C&apos;EST CLARISSE
           </h2>
-          <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
-            {site.name} est installé dans un grand atelier situé à {ville}, près de {site.city},
-            partagé avec trois autres poseurs professionnels. Un espace pensé pour travailler dans
-            de bonnes conditions, accueillir les véhicules et réaliser des projets de toutes tailles,
-            de la petite personnalisation au covering complet.
-          </p>
-          <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
-            Plusieurs savoir-faire réunis au même endroit, et la possibilité de collaborer sur
-            certains projets. Lorsque le projet le nécessite, j&apos;interviens aussi directement
-            sur site, en déplacement partout en France.
-          </p>
-          <p className="mb-5 font-sans text-base leading-[1.85] text-muted">
-            Du simple sticker au covering complet, on travaille sur voitures, utilitaires et
-            deux-roues, à {site.city} et dans toute l&apos;{site.department}.
-          </p>
-          <p className="mb-[30px] font-sans text-base leading-[1.85] font-semibold text-bright">
-            Un atelier, plusieurs savoir-faire, et surtout une même exigence : un résultat propre et
-            professionnel.
-          </p>
+          <div className="mb-[30px] flex flex-col gap-5 font-sans text-base leading-[1.85] text-muted">
+            <p>
+              23 ans, passionnée depuis toujours par l&apos;univers du sport mécanique et tout ce
+              qui touche aux véhicules. J&apos;ai fait de cette passion mon métier : de la création
+              graphique à la pose, j&apos;aime donner vie aux idées de mes clients. Covering, kit
+              déco, stickers, marquage publicitaire,{" "}
+              <strong className="font-semibold text-bright">
+                chaque projet est l&apos;occasion de créer quelque chose d&apos;unique.
+              </strong>
+            </p>
+            <p>
+              Je travaille dans un grand atelier à {ville}, près de {site.city}, partagé avec trois
+              autres poseurs professionnels : plusieurs savoir-faire réunis au même endroit, et la
+              possibilité de collaborer sur certains projets. Du simple sticker au covering
+              complet, sur voitures, utilitaires et deux-roues, en atelier ou directement sur site,
+              partout en France.
+            </p>
+            <p className="font-semibold text-bright">
+              Mon objectif : un travail soigné, créatif et personnalisé, avec un résultat propre et
+              professionnel.
+            </p>
+          </div>
 
           <ul className="flex flex-wrap gap-3.5">
             {encarts.map((e) => (

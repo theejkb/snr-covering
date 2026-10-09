@@ -8,7 +8,6 @@ import { RealisationsSection } from "@/components/sections/RealisationsSection";
 import { AvantApres } from "@/components/sections/AvantApres";
 import { Methode } from "@/components/sections/Methode";
 import { Atelier } from "@/components/sections/Atelier";
-import { Portrait } from "@/components/sections/Portrait";
 import { Instagram } from "@/components/sections/Instagram";
 import { Devis } from "@/components/sections/Devis";
 import {
@@ -43,8 +42,8 @@ export const metadata: Metadata = {
 
 /**
  * L'ordre des sections suit la maquette `SNR Covering.dc.html` : hero, bandeau,
- * prestations, réalisations, avant/après, méthode, atelier, Instagram, devis.
- * Seul ajout : la présentation de Clarisse (`Portrait`), juste avant l'atelier.
+ * prestations, réalisations, avant/après, méthode, atelier (qui présente aussi
+ * Clarisse), Instagram, devis.
  *
  * Pas de `FAQPage` dans le balisage : les questions ne sont plus affichées sur
  * la page, et Google interdit de baliser un contenu que le visiteur ne voit pas.
@@ -66,7 +65,6 @@ export default function Page() {
       <RealisationsSection />
       <AvantApres />
       <Methode />
-      <Portrait />
       <Atelier />
       <Instagram />
       <Devis />
