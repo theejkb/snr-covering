@@ -43,10 +43,11 @@ export const site = {
     street: "2 chemin du Bac",
     postalCode: "38360",
     city: "Sassenage",
-    // Coordonnées GPS : à renseigner avec la position exacte de l'atelier
-    // (clic droit sur Google Maps). Sans elles, le balisage omet `geo`.
-    lat: null,
-    lng: null,
+    // Position au numéro de rue, d'après la Base Adresse Nationale
+    // (api-adresse.data.gouv.fr). À corriger si l'entrée de l'atelier est
+    // ailleurs sur la parcelle.
+    lat: 45.219866,
+    lng: 5.667,
   } as null | {
     street: string;
     postalCode: string;
