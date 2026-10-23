@@ -9,9 +9,13 @@ import { CATEGORIES } from "./categories";
  * la redirection `/realisations/:slug` de next.config.ts passe avant les
  * fichiers statiques et renverrait chaque photo vers l'accueil.
  *
- * `span: 2` occupe deux colonnes. Avec cinq tuiles dont trois larges (1ʳᵉ,
- * 4ᵉ et 5ᵉ), la grille de 4 colonnes forme deux lignes pleines. En ajouter :
- * garder un total de colonnes multiple de 4.
+ * Les six dernières tuiles (Ducati, marquages, atelier) viennent du second
+ * envoi d'octobre 2026, reçu en basse définition : à remplacer par les
+ * originaux, sous le même nom de fichier, avant la mise en ligne.
+ *
+ * `span: 2` occupe deux colonnes. Avec onze tuiles dont cinq larges, la grille
+ * de 4 colonnes forme quatre lignes pleines. En ajouter : garder un total de
+ * colonnes multiple de 4.
  *
  * Les photos sont surtout en portrait alors que les tuiles sont plutôt
  * larges : `object-cover` recadre au centre, ce qui garde le véhicule.
@@ -92,6 +96,78 @@ const data: Tuile[] = [
       alt: "Pose d'un covering imprimé Genshin Impact sur une Toyota Yaris blanche, en cours à l'atelier",
       width: 1500,
       height: 2000,
+    },
+  },
+  {
+    title: "Ducati SuperSport",
+    cat: "Kit déco",
+    span: 2,
+    photo: {
+      src: "/images/realisations/ducati-supersport-kit-deco-blanc-rouge.jpg",
+      alt: "Ducati SuperSport en kit déco blanc et rouge, coulures rouges et logo diable, vue de profil",
+      width: 360,
+      height: 480,
+      position: "50% 62%",
+    },
+  },
+  {
+    title: "SuperSport, détail",
+    cat: "Kit déco",
+    span: 1,
+    photo: {
+      src: "/images/realisations/ducati-supersport-kit-deco-detail-avant.jpg",
+      alt: "Avant de la Ducati SuperSport : carénage blanc à coulures rouges, logo diable et jantes liserées rouge",
+      width: 360,
+      height: 480,
+    },
+  },
+  {
+    title: "Hydrocureur",
+    cat: "Marquage",
+    label: "Marquage publicitaire",
+    span: 1,
+    photo: {
+      src: "/images/realisations/hydrocureur-marquage-publicitaire.jpg",
+      alt: "Citerne d'hydrocureur blanche marquée « Assainissement & Maintenance », à l'atelier",
+      width: 360,
+      height: 480,
+    },
+  },
+  {
+    title: "Utilitaire MLS",
+    cat: "Marquage",
+    label: "Marquage publicitaire",
+    span: 1,
+    photo: {
+      src: "/images/realisations/utilitaire-marquage-logo-mls.jpg",
+      alt: "Portière d'un camion gris anthracite marquée du blason MLS en blanc",
+      width: 360,
+      height: 624,
+      position: "50% 76%",
+    },
+  },
+  {
+    title: "Pose à l'atelier",
+    cat: "Covering",
+    label: "À l'atelier",
+    span: 1,
+    photo: {
+      src: "/images/realisations/clarisse-atelier-yamaha-mt.jpg",
+      alt: "Clarisse accroupie devant une Yamaha MT grise, à l'atelier de Sassenage",
+      width: 540,
+      height: 360,
+    },
+  },
+  {
+    title: "Kit déco sur mesure",
+    cat: "Kit déco",
+    label: "Pose kit déco",
+    span: 2,
+    photo: {
+      src: "/images/realisations/pose-kit-deco-moto-atelier.jpg",
+      alt: "Clarisse pose un kit déco imprimé multicolore sur le réservoir d'un roadster Honda, à l'atelier",
+      width: 540,
+      height: 360,
     },
   },
 ];
