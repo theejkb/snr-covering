@@ -9,12 +9,15 @@ import { CATEGORIES } from "./categories";
  * la redirection `/realisations/:slug` de next.config.ts passe avant les
  * fichiers statiques et renverrait chaque photo vers l'accueil.
  *
- * Les six dernières tuiles (Ducati, marquages, atelier) viennent du second
- * envoi d'octobre 2026, reçu en basse définition : à remplacer par les
- * originaux, sous le même nom de fichier, avant la mise en ligne.
+ * Deux ou trois chantiers par prestation, jamais deux fois le même véhicule.
+ * La ZX-6R n'y est pas : elle occupe déjà le Hero et l'avant/après.
  *
- * `span: 2` occupe deux colonnes. Avec onze tuiles dont cinq larges, la grille
- * de 4 colonnes forme quatre lignes pleines. En ajouter : garder un total de
+ * Ducati, MLS et hydrocureur viennent du second envoi d'octobre 2026, reçu
+ * en basse définition : tuiles étroites seulement, tant que les originaux ne
+ * remplacent pas ces fichiers sous le même nom.
+ *
+ * `span: 2` occupe deux colonnes. Avec sept tuiles dont une large, la grille
+ * de 4 colonnes forme deux lignes pleines. En ajouter : garder un total de
  * colonnes multiple de 4.
  *
  * Les photos sont surtout en portrait alors que les tuiles sont plutôt
@@ -41,52 +44,6 @@ export type Tuile = z.infer<typeof tuileSchema>;
 
 const data: Tuile[] = [
   {
-    title: "Kawasaki ZX-6R gris satiné",
-    cat: "Covering",
-    span: 2,
-    photo: {
-      src: "/images/realisations/kawasaki-zx6r-covering-gris-satine.jpg",
-      alt: "Kawasaki Ninja ZX-6R en covering intégral gris satiné, vue de profil",
-      width: 1500,
-      height: 2000,
-      position: "50% 56%",
-    },
-  },
-  {
-    title: "Impreza bicolore",
-    cat: "Covering",
-    span: 1,
-    photo: {
-      src: "/images/realisations/subaru-impreza-covering-bicolore-violet.jpg",
-      alt: "Subaru Impreza break en covering bicolore violet et argent, jantes rouges, à l'atelier",
-      width: 1500,
-      height: 2000,
-    },
-  },
-  {
-    title: "MT-07 caméléon",
-    cat: "Covering",
-    span: 1,
-    photo: {
-      src: "/images/realisations/yamaha-mt07-covering-reservoir-cameleon.jpg",
-      alt: "Yamaha MT-07, réservoir en film caméléon violet et vert avec logo blanc",
-      width: 1500,
-      height: 2000,
-    },
-  },
-  {
-    title: "Supermotard noir mat",
-    cat: "Kit déco",
-    span: 2,
-    photo: {
-      src: "/images/realisations/supermotard-covering-noir-mat.jpg",
-      alt: "Moto supermotard habillée d'un kit déco noir mat, garée devant une façade",
-      width: 1138,
-      height: 2000,
-      position: "50% 58%",
-    },
-  },
-  {
     title: "Itasha Genshin Impact",
     cat: "Covering",
     label: "Covering imprimé",
@@ -101,7 +58,7 @@ const data: Tuile[] = [
   {
     title: "Ducati SuperSport",
     cat: "Kit déco",
-    span: 2,
+    span: 1,
     photo: {
       src: "/images/realisations/ducati-supersport-kit-deco-blanc-rouge.jpg",
       alt: "Ducati SuperSport en kit déco blanc et rouge, coulures rouges et logo diable, vue de profil",
@@ -111,26 +68,14 @@ const data: Tuile[] = [
     },
   },
   {
-    title: "SuperSport, détail",
-    cat: "Kit déco",
+    title: "MT-07 caméléon",
+    cat: "Covering",
     span: 1,
     photo: {
-      src: "/images/realisations/ducati-supersport-kit-deco-detail-avant.jpg",
-      alt: "Avant de la Ducati SuperSport : carénage blanc à coulures rouges, logo diable et jantes liserées rouge",
-      width: 360,
-      height: 480,
-    },
-  },
-  {
-    title: "Hydrocureur",
-    cat: "Marquage",
-    label: "Marquage publicitaire",
-    span: 1,
-    photo: {
-      src: "/images/realisations/hydrocureur-marquage-publicitaire.jpg",
-      alt: "Citerne d'hydrocureur blanche marquée « Assainissement & Maintenance », à l'atelier",
-      width: 360,
-      height: 480,
+      src: "/images/realisations/yamaha-mt07-covering-reservoir-cameleon.jpg",
+      alt: "Yamaha MT-07, réservoir en film caméléon violet et vert avec logo blanc",
+      width: 1500,
+      height: 2000,
     },
   },
   {
@@ -147,27 +92,37 @@ const data: Tuile[] = [
     },
   },
   {
-    title: "Pose à l'atelier",
+    title: "Impreza bicolore",
     cat: "Covering",
-    label: "À l'atelier",
     span: 1,
     photo: {
-      src: "/images/realisations/clarisse-atelier-yamaha-mt.jpg",
-      alt: "Clarisse accroupie devant une Yamaha MT grise, à l'atelier de Sassenage",
-      width: 540,
-      height: 360,
+      src: "/images/realisations/subaru-impreza-covering-bicolore-violet.jpg",
+      alt: "Subaru Impreza break en covering bicolore violet et argent, jantes rouges, à l'atelier",
+      width: 1500,
+      height: 2000,
     },
   },
   {
-    title: "Kit déco sur mesure",
+    title: "Supermotard noir mat",
     cat: "Kit déco",
-    label: "Pose kit déco",
-    span: 2,
+    span: 1,
     photo: {
-      src: "/images/realisations/pose-kit-deco-moto-atelier.jpg",
-      alt: "Clarisse pose un kit déco imprimé multicolore sur le réservoir d'un roadster Honda, à l'atelier",
-      width: 540,
-      height: 360,
+      src: "/images/realisations/supermotard-covering-noir-mat.jpg",
+      alt: "Moto supermotard habillée d'un kit déco noir mat, garée devant une façade",
+      width: 1138,
+      height: 2000,
+    },
+  },
+  {
+    title: "Hydrocureur",
+    cat: "Marquage",
+    label: "Marquage publicitaire",
+    span: 1,
+    photo: {
+      src: "/images/realisations/hydrocureur-marquage-publicitaire.jpg",
+      alt: "Citerne d'hydrocureur blanche marquée « Assainissement & Maintenance », à l'atelier",
+      width: 360,
+      height: 480,
     },
   },
 ];
