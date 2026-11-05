@@ -16,6 +16,12 @@ const schema = z.object({
    * Voir `src/lib/instagram.ts` pour la marche à suivre.
    */
   INSTAGRAM_ACCESS_TOKEN: z.string().min(1).optional(),
+  /**
+   * ID du compte Instagram professionnel (chiffres uniquement). Présent, il
+   * active le mode « utilisateur système » via graph.facebook.com, dont le
+   * jeton n'expire pas. Absent, on reste sur graph.instagram.com/me.
+   */
+  INSTAGRAM_USER_ID: z.string().regex(/^\d+$/).optional(),
 });
 
 const parsed = schema.safeParse({
@@ -24,6 +30,7 @@ const parsed = schema.safeParse({
   CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL || undefined,
   CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL || undefined,
   INSTAGRAM_ACCESS_TOKEN: process.env.INSTAGRAM_ACCESS_TOKEN || undefined,
+  INSTAGRAM_USER_ID: process.env.INSTAGRAM_USER_ID || undefined,
 });
 
 if (!parsed.success) {

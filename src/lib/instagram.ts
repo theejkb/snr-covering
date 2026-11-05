@@ -8,11 +8,11 @@ import { env } from "./env";
  * scraping viole les conditions d'utilisation. L'API Basic Display, elle, a été
  * arrêtée en décembre 2024.
  *
- * Le seul chemin officiel restant est l'API Instagram avec connexion Instagram,
- * qui demande trois choses, toutes gratuites :
- *   1. un compte Instagram professionnel (Business ou Créateur) ;
- *   2. une application créée sur developers.facebook.com ;
- *   3. un jeton d'accès longue durée, valable 60 jours et renouvelable.
+ * Deux chemins officiels, choisis selon les variables présentes :
+ *   - avec `INSTAGRAM_USER_ID` : API Graph via Facebook, jeton d'un utilisateur
+ *     système Meta Business, qui n'expire pas (mode retenu, voir README) ;
+ *   - sans : API Instagram avec connexion Instagram, jeton de 60 jours à
+ *     renouveler à la main.
  *
  * Tant que `INSTAGRAM_ACCESS_TOKEN` est absent, la fonction renvoie un tableau
  * vide et la section retombe sur ses emplacements réservés. Aucune erreur, rien
@@ -22,22 +22,26 @@ import { env } from "./env";
 export type Publication = {
   id: string;
   permalink: string;
-  /** URL de l'image à afficher. Pour une vidéo, c'est la vignette. */
+  /** URL de la photo. Pour un carrousel, sa première photo. */
   image: string;
   /** Légende nettoyée, utilisée comme texte alternatif. */
   legende: string;
-  estVideo: boolean;
+};
+
+type Media = {
+  media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  media_url?: string;
 };
 
 type ReponseApi = {
-  data?: Array<{
-    id: string;
-    caption?: string;
-    media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
-    media_url?: string;
-    thumbnail_url?: string;
-    permalink: string;
-  }>;
+  data?: Array<
+    Media & {
+      id: string;
+      caption?: string;
+      permalink: string;
+      children?: { data: Media[] };
+    }
+  >;
   error?: { message: string; type: string; code: number };
 };
 
@@ -57,9 +61,18 @@ function texteAlternatif(caption: string | undefined, index: number): string {
 export async function getDernieresPublications(limite = 6): Promise<Publication[]> {
   if (!env.INSTAGRAM_ACCESS_TOKEN) return [];
 
-  const url = new URL("https://graph.instagram.com/me/media");
-  url.searchParams.set("fields", "id,caption,media_type,media_url,thumbnail_url,permalink");
-  url.searchParams.set("limit", String(limite));
+  const url = new URL(
+    env.INSTAGRAM_USER_ID
+      ? `https://graph.facebook.com/${env.INSTAGRAM_USER_ID}/media`
+      : "https://graph.instagram.com/me/media",
+  );
+  url.searchParams.set(
+    "fields",
+    "id,caption,media_type,media_url,permalink,children{media_type,media_url}",
+  );
+  // Les vidéos sont écartées après coup : on en demande plus pour garder
+  // `limite` photos même quand le compte publie surtout des reels.
+  url.searchParams.set("limit", String(limite * 4));
   url.searchParams.set("access_token", env.INSTAGRAM_ACCESS_TOKEN);
 
   try {
@@ -69,21 +82,29 @@ export async function getDernieresPublications(limite = 6): Promise<Publication[
     const json: ReponseApi = await reponse.json();
 
     if (json.error) {
-      // Cas le plus fréquent : jeton expiré au bout de 60 jours.
+      // Cas le plus fréquent : jeton expiré (mode 60 jours) ou accès retiré
+      // à l'utilisateur système.
       console.error("[instagram]", json.error.message);
       return [];
     }
 
     return (json.data ?? [])
       .map((post, i) => {
-        const image = post.media_type === "VIDEO" ? post.thumbnail_url : post.media_url;
+        // Photos uniquement : les vidéos et reels sont ignorés. Pour un
+        // carrousel, `media_url` est celui du premier élément, qui peut être
+        // une vidéo : on cherche donc sa première photo.
+        const image =
+          post.media_type === "IMAGE"
+            ? post.media_url
+            : post.media_type === "CAROUSEL_ALBUM"
+              ? post.children?.data.find((c) => c.media_type === "IMAGE")?.media_url
+              : undefined;
         if (!image) return null;
         return {
           id: post.id,
           permalink: post.permalink,
           image,
           legende: texteAlternatif(post.caption, i),
-          estVideo: post.media_type === "VIDEO",
         };
       })
       .filter((p): p is Publication => p !== null)

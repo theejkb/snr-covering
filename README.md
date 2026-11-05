@@ -73,19 +73,35 @@ Tant que `INSTAGRAM_ACCESS_TOKEN` est vide, la grille garde ses six emplacements
 réservés : la mise en page est identique, seules les images manquent. Le bouton
 « Nous suivre » fonctionne dans tous les cas.
 
-Pour obtenir le jeton (gratuit, environ 15 minutes) :
+Mode retenu : **jeton d'utilisateur système Meta Business**, qui n'expire pas.
+Deux variables à renseigner (`.env.local` et Vercel) :
 
-1. Passer **@snrcovering en compte professionnel** dans l'application Instagram
-   (Paramètres > Type de compte > Basculer vers un compte professionnel).
-   C'est la condition d'accès à l'API, sans elle rien n'est possible.
-2. Créer une application sur [developers.facebook.com](https://developers.facebook.com),
-   y ajouter le produit **Instagram** et connecter le compte.
-3. Générer un **jeton d'accès longue durée** avec la permission
-   `instagram_business_basic`, puis le coller dans `.env.local`.
+```
+INSTAGRAM_ACCESS_TOKEN=<jeton de l'utilisateur système>
+INSTAGRAM_USER_ID=<ID du compte Instagram pro, chiffres uniquement>
+```
 
-Le jeton expire au bout de **60 jours**. Passé ce délai, la section repasse
-silencieusement sur ses emplacements réservés et l'erreur est écrite dans les
-logs du serveur. Prévoir un rappel de renouvellement.
+Pour les obtenir (une seule fois, environ 20 minutes) :
+
+1. Passer **@snrcovering en compte professionnel** et le relier à une
+   **Page Facebook**.
+2. Créer une application de type Business sur
+   [developers.facebook.com](https://developers.facebook.com), rattachée au
+   portefeuille Meta Business.
+3. Dans [business.facebook.com](https://business.facebook.com) > Paramètres >
+   Utilisateurs système : créer un utilisateur système, lui assigner la Page,
+   le compte Instagram et l'application.
+4. Générer un jeton avec **Expiration : jamais** et les permissions
+   `instagram_basic`, `pages_show_list` et `pages_read_engagement`.
+5. Récupérer l'ID Instagram : appeler
+   `https://graph.facebook.com/me/accounts?fields=instagram_business_account&access_token=<jeton>`.
+
+Le jeton ne cesse de fonctionner que si l'accès est révoqué. Dans ce cas, la
+section repasse silencieusement sur ses emplacements réservés et l'erreur est
+écrite dans les logs du serveur.
+
+Sans `INSTAGRAM_USER_ID`, le code utilise l'API Instagram avec connexion
+Instagram (`graph.instagram.com/me`), dont le jeton expire au bout de 60 jours.
 
 Pourquoi ce détour : Instagram a fermé son accès public (toute requête non
 authentifiée renvoie une erreur 400) et arrêté l'API Basic Display en décembre

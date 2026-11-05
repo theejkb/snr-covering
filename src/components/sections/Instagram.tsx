@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRightIcon, InstagramLogoIcon, PlayIcon } from "../ui/icons";
+import { ArrowRightIcon, InstagramLogoIcon } from "../ui/icons";
 import { site } from "@/config/site";
 import { getDernieresPublications } from "@/lib/instagram";
 import { Container } from "../ui/Container";
@@ -64,14 +64,6 @@ export async function Instagram() {
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover"
                     />
-                    {p.estVideo && (
-                      <span
-                        aria-hidden
-                        className="absolute top-2.5 right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-ink/70 text-bright"
-                      >
-                        <PlayIcon size={14} weight="fill" />
-                      </span>
-                    )}
                   </a>
                 </li>
               ))
