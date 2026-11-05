@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import { ArrowRightIcon, CheckIcon } from "../ui/icons";
+import { ArrowRightIcon, CameraIcon, CheckIcon, XIcon } from "../ui/icons";
 import { CATEGORIES } from "@/content/categories";
 import { envoyerDevis, type DevisState } from "@/app/actions/devis";
+import { PHOTOS_MAX, PHOTOS_TOTAL_MAX, PHOTO_COTE_MAX } from "@/lib/photos";
 
 const initial: DevisState = { status: "idle" };
 
@@ -41,9 +42,8 @@ export function DevisForm() {
         </span>
         <p className="font-display text-[38px] leading-[.95] italic">C&apos;EST NOTÉ</p>
         <p className="mt-3 max-w-[300px] font-sans text-sm leading-[1.7] text-muted-2">
-          On regarde votre projet et on vous recontacte sous 48 h. Si vous avez des
-          photos du véhicule, répondez simplement à notre email : c&apos;est ce qui nous permet
-          d&apos;être précis du premier coup.
+          On regarde votre projet et on vous recontacte sous 48 h. D&apos;autres photos à
+          ajouter ? Répondez simplement à notre email.
         </p>
       </div>
     );
@@ -54,7 +54,7 @@ export function DevisForm() {
       <div className="mb-1">
         <p className="font-display text-2xl text-bright italic">VOTRE DEVIS EN 2 MINUTES</p>
         <p className="mt-1 font-sans text-[12px] text-dim">
-          Cinq champs, pas de compte à créer.
+          Cinq champs, des photos si vous en avez, pas de compte à créer.
         </p>
       </div>
 
@@ -117,6 +117,8 @@ export function DevisForm() {
         <Erreur id="message-error" errors={state.fieldErrors?.message} />
       </div>
 
+      <ChampPhotos errors={state.fieldErrors?.photos} etat={state} />
+
       {/* Honeypot : masqué aux humains, aux lecteurs d'écran et au focus */}
       <div aria-hidden className="absolute -left-[9999px]">
         <label htmlFor="societe">Société</label>
@@ -177,6 +179,148 @@ function Submit() {
         </>
       )}
     </button>
+  );
+}
+
+type Photo = { fichier: File; apercu: string };
+
+/**
+ * Réduit une photo à `PHOTO_COTE_MAX` px de côté, en JPEG. Sans ça, deux
+ * photos de téléphone suffisent à dépasser les 4,5 Mo que Vercel accepte par
+ * requête. Si le navigateur ne sait pas la décoder (HEIC hors Safari), la
+ * photo part telle quelle et la limite de taille fait le tri.
+ */
+async function reduire(fichier: File): Promise<File> {
+  try {
+    const image = await createImageBitmap(fichier);
+    const ratio = Math.min(1, PHOTO_COTE_MAX / Math.max(image.width, image.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(image.width * ratio);
+    canvas.height = Math.round(image.height * ratio);
+    canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    image.close();
+    const blob = await new Promise<Blob | null>((ok) => canvas.toBlob(ok, "image/jpeg", 0.82));
+    if (!blob) return fichier;
+    const nom = `${fichier.name.replace(/\.[^.]+$/, "") || "photo"}.jpg`;
+    return new File([blob], nom, { type: "image/jpeg" });
+  } catch {
+    return fichier;
+  }
+}
+
+/**
+ * Photos du véhicule, facultatives. Le sélecteur visible n'a pas de `name` :
+ * ce sont les photos réduites, recopiées dans le champ caché, qui partent avec
+ * le formulaire.
+ */
+function ChampPhotos({ errors, etat }: { errors?: string[]; etat: DevisState }) {
+  const champCache = useRef<HTMLInputElement>(null);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [enCours, setEnCours] = useState(false);
+  const [alerte, setAlerte] = useState<string | null>(null);
+
+  // React vide les champs du formulaire après chaque envoi : on recopie les
+  // photos dans le champ caché à chaque changement, et après chaque réponse.
+  useEffect(() => {
+    if (!champCache.current) return;
+    const transfert = new DataTransfer();
+    photos.forEach((p) => transfert.items.add(p.fichier));
+    champCache.current.files = transfert.files;
+  }, [photos, etat]);
+
+  // Libère les aperçus au démontage.
+  const photosRef = useRef(photos);
+  useEffect(() => {
+    photosRef.current = photos;
+  }, [photos]);
+  useEffect(() => () => photosRef.current.forEach((p) => URL.revokeObjectURL(p.apercu)), []);
+
+  async function ajouter(e: React.ChangeEvent<HTMLInputElement>) {
+    const choisis = Array.from(e.target.files ?? []);
+    e.target.value = "";
+    if (!choisis.length) return;
+
+    setAlerte(null);
+    const place = PHOTOS_MAX - photos.length;
+    if (choisis.length > place) setAlerte(`${PHOTOS_MAX} photos au maximum.`);
+
+    setEnCours(true);
+    const reduites = await Promise.all(choisis.slice(0, place).map(reduire));
+    setEnCours(false);
+
+    let total = photos.reduce((t, p) => t + p.fichier.size, 0);
+    const retenues: Photo[] = [];
+    for (const fichier of reduites) {
+      if (total + fichier.size > PHOTOS_TOTAL_MAX) {
+        setAlerte("Photos trop lourdes : envoyez les autres en réponse à notre email.");
+        break;
+      }
+      total += fichier.size;
+      retenues.push({ fichier, apercu: URL.createObjectURL(fichier) });
+    }
+    setPhotos((v) => [...v, ...retenues]);
+  }
+
+  function retirer(photo: Photo) {
+    URL.revokeObjectURL(photo.apercu);
+    setPhotos((v) => v.filter((p) => p !== photo));
+    setAlerte(null);
+  }
+
+  const message = alerte ?? errors?.[0];
+
+  return (
+    <div>
+      <input ref={champCache} type="file" name="photos" multiple hidden tabIndex={-1} />
+
+      {photos.length > 0 && (
+        <ul className="mb-2.5 flex flex-wrap gap-2">
+          {photos.map((p, i) => (
+            <li key={p.apercu} className="relative">
+              {/* <img> et non next/image : l'aperçu est une URL blob: locale. */}
+              <img
+                src={p.apercu}
+                alt={`Photo ${i + 1}`}
+                className="h-16 w-16 rounded-field border border-line-field object-cover"
+              />
+              <button
+                type="button"
+                onClick={() => retirer(p)}
+                aria-label={`Retirer la photo ${i + 1}`}
+                className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-bright text-ink"
+              >
+                <XIcon size={12} weight="bold" aria-hidden />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {photos.length < PHOTOS_MAX && (
+        <label className="flex cursor-pointer items-center justify-center gap-2.5 rounded-field border border-dashed border-line-field px-[15px] py-[13px] font-sans text-[13px] text-muted-2 transition-colors hover:text-bright focus-within:text-bright">
+          <CameraIcon size={18} aria-hidden />
+          {enCours
+            ? "Préparation des photos…"
+            : photos.length
+              ? `Ajouter d'autres photos (${PHOTOS_MAX - photos.length} restantes)`
+              : `Ajouter des photos du véhicule (${PHOTOS_MAX} max, facultatif)`}
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={ajouter}
+            disabled={enCours}
+            className="sr-only"
+          />
+        </label>
+      )}
+
+      {message && (
+        <p role="alert" className="mt-1.5 font-sans text-xs text-pink">
+          {message}
+        </p>
+      )}
+    </div>
   );
 }
 

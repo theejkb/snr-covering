@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
    */
   experimental: {
     optimizePackageImports: ["@phosphor-icons/react", "@phosphor-icons/react/ssr"],
+    /**
+     * Les photos du devis passent par la Server Action. 1 Mo par défaut ;
+     * relevé juste sous les 4,5 Mo que Vercel accepte par requête. Les photos
+     * sont réduites côté client pour tenir dans 4 Mo (voir `src/lib/photos.ts`).
+     */
+    serverActions: { bodySizeLimit: "4.4mb" },
   },
 
   images: {

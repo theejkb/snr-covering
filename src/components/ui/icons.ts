@@ -15,6 +15,7 @@
 export type { Icon } from "@phosphor-icons/react/dist/lib/types";
 
 export { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowRight";
+export { CameraIcon } from "@phosphor-icons/react/dist/ssr/Camera";
 export { ArrowsLeftRightIcon } from "@phosphor-icons/react/dist/ssr/ArrowsLeftRight";
 export { CheckIcon } from "@phosphor-icons/react/dist/ssr/Check";
 export { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
@@ -24,3 +25,4 @@ export { PhoneIcon } from "@phosphor-icons/react/dist/ssr/Phone";
 export { PlusIcon } from "@phosphor-icons/react/dist/ssr/Plus";
 export { PlayIcon } from "@phosphor-icons/react/dist/ssr/Play";
 export { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";
+export { XIcon } from "@phosphor-icons/react/dist/ssr/X";
