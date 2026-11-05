@@ -53,10 +53,7 @@ export function Hero() {
           <p className="h-display text-[clamp(36px,11vw,64px)] leading-[.8] lg:text-[clamp(36px,5.2vw,84px)]">
             <span className="reveal in block">CHANGEZ DE COULEUR,</span>
             <span className="reveal in block" style={{ animationDelay: ".1s" }}>
-              PAS DE
-            </span>
-            <span className="reveal in block text-dim-2" style={{ animationDelay: ".1s" }}>
-              VÉHICULE
+              PAS DE <span className="text-dim-2">VÉHICULE</span>
             </span>
           </p>
 
