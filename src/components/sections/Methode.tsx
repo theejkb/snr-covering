@@ -32,7 +32,7 @@ const etapes = [
     n: "03",
     titre: "ON POSE",
     texte: "Le véhicule reste à l'atelier, préparation, démontage, pose au millimètre, remontage.",
-    delais: ["1 À 5 JOURS SELON LA PRESTATION"],
+    delais: ["1 À 7 JOURS SELON LA PRESTATION"],
     accent: "blue" as const,
   },
   {
@@ -59,13 +59,14 @@ export function Methode() {
         <div className="lg:sticky lg:top-[110px]">
           <Eyebrow>DÉROULÉ DU PROJET</Eyebrow>
           <h2 className="h-display mb-5 text-[clamp(38px,6vw,74px)] leading-[.9]">
-            COMMENT
+            COMMENT SE PASSE
             <br />
-            ÇA SE PASSE
+            UN COVERING
           </h2>
           <p className="mb-[26px] max-w-[340px] font-sans text-[15px] leading-[1.75] text-dim">
-            Quatre étapes, des délais annoncés à l&apos;avance. Vous savez quand vous récupérez
-            votre véhicule dès le devis, pas la veille.
+            Quatre étapes, des délais annoncés à l&apos;avance : de 1 à 7 jours d&apos;atelier
+            selon la prestation. Vous savez quand vous récupérez votre véhicule dès le devis, pas
+            la veille.
           </p>
           <ButtonLink href="#devis">
             COMMENCER PAR L&apos;ÉTAPE 1

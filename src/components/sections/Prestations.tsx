@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "../ui/icons";
+import { site } from "@/config/site";
 import { prestations } from "@/content/prestations";
 import { Container } from "../ui/Container";
 import { Eyebrow } from "../ui/Eyebrow";
@@ -18,14 +19,14 @@ export function Prestations() {
       <Container>
         <div className="mb-11 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <Eyebrow>NOS SERVICES</Eyebrow>
+            <Eyebrow>NOS SERVICES À {site.city.toUpperCase()} ET EN {site.department.toUpperCase()}</Eyebrow>
             <h2 className="h-display text-[clamp(26px,7vw,80px)] leading-[.9]">
-              PRESTATIONS COVERING &amp; PPF
+              COVERING, PPF &amp; MARQUAGE
             </h2>
           </div>
           <p className="max-w-[320px] font-sans text-sm leading-[1.6] text-dim md:text-right">
             Six prestations, toutes réversibles : votre peinture d&apos;origine reste intacte
-            dessous.
+            dessous. Voitures, motos, utilitaires et flottes d&apos;entreprise.
           </p>
         </div>
 

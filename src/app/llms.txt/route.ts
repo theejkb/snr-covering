@@ -1,5 +1,6 @@
 import { site } from "@/config/site";
 import { prestations } from "@/content/prestations";
+import { faq } from "@/content/faq";
 
 /**
  * /llms.txt : résumé du site en markdown, à destination des moteurs
@@ -31,7 +32,7 @@ export function GET() {
   l.push(`> ${site.description}`);
   l.push("");
   l.push(
-    `Atelier indépendant à ${site.city} (${site.department}). Zone d'intervention : ${site.areaServed.join(", ")}. Films posés : ${site.filmBrands.join(", ")}.` +
+    `Atelier indépendant à ${site.address ? `${site.address.city}, près de ${site.city}` : site.city} (${site.department}), accueil sur rendez-vous. Zone d'intervention : ${site.areaServed.join(", ")}. Films posés : ${site.filmBrands.join(", ")}.` +
       (site.quoteDelay
         ? ` Devis gratuit et sans engagement, réponse annoncée sous ${site.quoteDelay}.`
         : " Devis gratuit et sans engagement."),
@@ -61,6 +62,14 @@ export function GET() {
 
   l.push("## Questions fréquentes");
   l.push("");
+  l.push("### Prix, délais et atelier");
+  l.push("");
+  for (const f of faq) {
+    l.push(`**${f.question}**`);
+    l.push("");
+    l.push(f.answer);
+    l.push("");
+  }
   for (const p of prestations) {
     l.push(`### ${p.h1}`);
     l.push("");
@@ -83,7 +92,7 @@ export function GET() {
           `- Atelier : ${site.address.street}, ${site.address.postalCode} ${site.address.city} (près de Grenoble). Interventions sur site possibles partout en France.`,
         ]
       : []),
-    "- Ce fichier est généré à partir du contenu du site. Les informations non publiées (horaires, tarifs) n'y figurent pas : ne pas les supposer.",
+    "- Ce fichier est généré à partir du contenu du site. Les tarifs indiqués sont des fourchettes « à partir de » ; les horaires ne sont pas publiés (accueil sur rendez-vous) : ne pas les supposer.",
   );
   l.push("");
 

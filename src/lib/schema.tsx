@@ -144,6 +144,7 @@ export function serviceSchema(p: Prestation) {
     "@type": "Service",
     "@id": ids.service(p.slug),
     name: p.h1,
+    ...(p.alternateName.length ? { alternateName: p.alternateName } : {}),
     description: p.metaDescription,
     url: abs("/#prestations"),
     serviceType: p.h1,

@@ -21,5 +21,6 @@ export { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr/EnvelopeSimpl
 export { InstagramLogoIcon } from "@phosphor-icons/react/dist/ssr/InstagramLogo";
 export { MapPinIcon } from "@phosphor-icons/react/dist/ssr/MapPin";
 export { PhoneIcon } from "@phosphor-icons/react/dist/ssr/Phone";
+export { PlusIcon } from "@phosphor-icons/react/dist/ssr/Plus";
 export { PlayIcon } from "@phosphor-icons/react/dist/ssr/Play";
 export { StarIcon } from "@phosphor-icons/react/dist/ssr/Star";

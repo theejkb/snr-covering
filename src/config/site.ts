@@ -19,7 +19,7 @@ export const site = {
    */
   indexable: process.env.NEXT_PUBLIC_SITE_INDEXABLE === "true",
   description:
-    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers, kit déco et marquage publicitaire.",
+    "SNR Covering est un atelier de covering voiture et moto à Sassenage, près de Grenoble (Isère), spécialisé en covering intégral, film PPF, déchromage, kit déco et marquage publicitaire.",
   city: "Grenoble",
   department: "Isère",
   /**

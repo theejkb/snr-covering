@@ -58,7 +58,8 @@ export function AvantApres() {
         <div className="mb-[38px] flex flex-wrap items-end justify-between gap-4">
           <h2 className="h-display text-[clamp(38px,6vw,72px)] leading-none">AVANT · APRÈS</h2>
           <p className="font-sans text-sm text-dim">
-            Glissez le curseur : une Kawasaki ZX-6R passée du vert d&apos;origine au gris satiné
+            Glissez le curseur : covering moto intégral sur une Kawasaki ZX-6R, passée du vert
+            d&apos;origine au gris satiné
           </p>
         </div>
 

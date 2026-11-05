@@ -14,6 +14,8 @@ const prestationSchema = z.object({
   accent: z.enum(["blue", "pink"]),
   /** h1 de la page dédiée : contient la requête cible */
   h1: z.string(),
+  /** Synonymes de la prestation, émis en `alternateName` dans le JSON-LD */
+  alternateName: z.array(z.string()).default([]),
   metaTitle: z.string().max(65),
   metaDescription: z.string().max(160),
   eyebrow: z.string(),
@@ -26,16 +28,18 @@ const prestationSchema = z.object({
 });
 
 export type Prestation = z.infer<typeof prestationSchema>;
+type PrestationInput = z.input<typeof prestationSchema>;
 
-const data: Prestation[] = [
+const data: PrestationInput[] = [
   {
     slug: "covering-voiture-grenoble",
     number: "01",
-    cardTitle: ["COVERING", "SEMI & FULL"],
+    cardTitle: ["COVERING", "TOTAL & PARTIEL"],
     cardExcerpt:
-      "Mat, satiné, brillant ou texturé : votre véhicule change de couleur en quelques jours. Le film se retire, la teinte d'origine réapparaît, et votre valeur de revente avec.",
+      "Covering intégral ou semi-covering (toit noir, capot, rétros, bas de caisse) : mat, satiné, brillant ou texturé, votre voiture ou votre moto change de couleur en quelques jours. Le film se retire, la teinte d'origine réapparaît, et votre valeur de revente avec.",
     accent: "blue",
     h1: "Covering voiture à Grenoble",
+    alternateName: ["covering intégral", "semi-covering", "wrapping", "covering moto"],
     metaTitle: "Covering voiture à Grenoble · SNR Covering",
     metaDescription:
       "Covering total ou partiel à Grenoble : films mats, brillants, satinés ou texturés, posés à la main. Réversible, sans abîmer la peinture. Devis gratuit.",
@@ -101,11 +105,12 @@ const data: Prestation[] = [
   {
     slug: "ppf-protection-carrosserie-grenoble",
     number: "02",
-    cardTitle: ["PPF", "PROTECTION"],
+    cardTitle: ["FILM PPF", "PROTECTION"],
     cardExcerpt:
-      "Les gravillons d'autoroute s'arrêtent sur le film, pas sur votre peinture. Invisible, auto-cicatrisant, garanti par le fabricant.",
+      "Film de protection transparent contre les gravillons, les rayures et les insectes, sur la face avant ou la carrosserie complète. Invisible, auto-cicatrisant, garanti par le fabricant. Utile sur les routes de montagne autour de Grenoble.",
     accent: "pink",
     h1: "Film de protection PPF à Grenoble",
+    alternateName: ["PPF", "paint protection film", "film de protection carrosserie"],
     metaTitle: "PPF à Grenoble, protection carrosserie | SNR Covering",
     metaDescription:
       "Pose de film de protection PPF à Grenoble : protection transparente contre les gravillons et les micro-rayures. Invisible et auto-cicatrisant.",
@@ -165,11 +170,12 @@ const data: Prestation[] = [
   {
     slug: "kit-deco-personnalise",
     number: "03",
-    cardTitle: ["KIT DÉCO", "PERSO"],
+    cardTitle: ["KIT DÉCO", "VOITURE & MOTO"],
     cardExcerpt:
-      "Une création unique, pensée selon vos envies. Couleurs, motifs, logos, texture : vous choisissez chaque détail, et le kit est conçu sur mesure pour votre véhicule.",
+      "Une création unique, dessinée selon vos envies : couleurs, motifs, logos, numéros, jusqu'à l'itasha complet. Le kit déco est conçu sur mesure pour votre carénage ou votre carrosserie, création graphique comprise.",
     accent: "blue",
     h1: "Kit déco personnalisé pour véhicule",
+    alternateName: ["kit déco moto", "kit déco voiture", "itasha"],
     metaTitle: "Kit déco personnalisé véhicule · SNR Covering Grenoble",
     metaDescription:
       "Création et pose de kits déco sur-mesure à Grenoble : bandes racing, motifs, numéros, logos de sponsors. Conception avec vous, pose à l'atelier.",
@@ -228,11 +234,12 @@ const data: Prestation[] = [
   {
     slug: "stickers-lettrage-vehicule",
     number: "04",
-    cardTitle: ["STICKERS", undefined],
+    cardTitle: ["STICKERS", "& LETTRAGE"],
     cardExcerpt:
-      "Des stickers 100 % personnalisés, créés selon vos envies et votre identité. Logo, texte, motif, numéro de course ou design complet : chacun est réalisé sur mesure pour son support.",
+      "Stickers 100 % personnalisés : logo, texte, numéro de course, plaque de course ou design complet. Découpés ou imprimés, chacun est réalisé sur mesure pour son support.",
     accent: "pink",
     h1: "Stickers et lettrage véhicule à Grenoble",
+    alternateName: ["lettrage adhésif", "sticker voiture", "sticker moto"],
     metaTitle: "Stickers et lettrage véhicule · SNR Covering Grenoble",
     metaDescription:
       "Découpe et pose de stickers et lettrage adhésif à Grenoble : logos, textes, numéros. À l'unité ou en série, pour véhicules et vitrines.",
@@ -292,9 +299,10 @@ const data: Prestation[] = [
     number: "05",
     cardTitle: ["MARQUAGE", "PUBLICITAIRE"],
     cardExcerpt:
-      "Vos véhicules, vitrines et enseignes deviennent de vrais outils de communication. Logo, coordonnées, slogan, visuels : chaque projet suit votre identité.",
+      "Marquage de véhicule utilitaire, flocage de flotte d'entreprise, vitrines et enseignes : vos véhicules deviennent un support de communication qui roule dans toute l'agglomération grenobloise. Logo, coordonnées, slogan, visuels.",
     accent: "blue",
     h1: "Marquage publicitaire à Grenoble",
+    alternateName: ["marquage véhicule", "flocage véhicule", "marquage utilitaire"],
     metaTitle: "Marquage publicitaire à Grenoble · SNR Covering",
     metaDescription:
       "Marquage publicitaire à Grenoble : véhicules, vitrines et enseignes habillés à votre identité. Logo, coordonnées, slogan, visuels. Devis gratuit.",
@@ -339,9 +347,10 @@ const data: Prestation[] = [
     number: "06",
     cardTitle: ["DÉCHROMAGE", undefined],
     cardExcerpt:
-      "Les entourages de vitres chromés sont ce qui date le plus un véhicule. On les passe en noir mat ou brillant, et on peut revenir en arrière.",
+      "Les entourages de vitres chromés sont ce qui date le plus un véhicule. On les passe en noir mat ou brillant (chrome delete), calandre et logos compris, et on peut revenir en arrière.",
     accent: "blue",
     h1: "Déchromage à Grenoble",
+    alternateName: ["chrome delete", "black pack"],
     metaTitle: "Déchromage à Grenoble · SNR Covering",
     metaDescription:
       "Déchromage de véhicule à Grenoble : calandre, entourages de vitres, baguettes et logos passés en noir mat ou brillant. Réversible, sans peinture.",

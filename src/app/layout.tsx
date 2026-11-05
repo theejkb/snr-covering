@@ -8,11 +8,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Covering auto à Grenoble · SNR Covering | PPF, déchromage, déco",
+    default: `Covering ${site.city} · voiture, moto, PPF | ${site.name}`,
     template: `%s | ${site.name}`,
   },
-  description:
-    "Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers, kit déco et marquage publicitaire. Devis gratuit.",
+  description: site.description,
   applicationName: site.name,
   authors: [{ name: site.name }],
   // Pas de canonical par défaut : chaque page déclare la sienne, pour éviter
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: site.url,
     siteName: site.name,
-    title: "Covering auto à Grenoble · SNR Covering",
+    title: `Covering ${site.city} · voiture, moto, PPF | ${site.name}`,
     description: site.description,
   },
   twitter: { card: "summary_large_image" },

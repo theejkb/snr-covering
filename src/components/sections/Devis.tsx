@@ -35,15 +35,17 @@ export function Devis() {
 
       <Container className="relative z-[2] grid gap-[60px] lg:grid-cols-2">
         <div>
-          <Eyebrow>PARLONS DE VOTRE VÉHICULE</Eyebrow>
+          <Eyebrow>DEVIS COVERING GRATUIT</Eyebrow>
           <h2 className="h-display mb-6 text-[clamp(40px,7vw,88px)] leading-[.85] lg:text-[clamp(40px,5.8vw,88px)]">
             DITES-NOUS
             <br />
             CE QUE VOUS VOULEZ
           </h2>
           <p className="mb-9 max-w-[420px] font-sans text-base leading-[1.7] text-muted">
-            Quelques photos de votre véhicule et une description de votre idée suffisent. On vous
-            répond{site.quoteDelay ? ` sous ${site.quoteDelay}` : ""}.
+            Quelques photos de votre véhicule et une description de votre idée suffisent. Devis
+            gratuit et sans engagement
+            {site.quoteDelay ? `, réponse sous ${site.quoteDelay}` : ""}, pour {site.city},{" "}
+            {site.address ? `${site.address.city}, ` : ""}Voiron et toute l&apos;{site.department}.
           </p>
 
           <ul className="flex flex-col gap-[18px]">

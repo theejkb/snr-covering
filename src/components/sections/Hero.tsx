@@ -15,6 +15,8 @@ import { Photo } from "../ui/Photo";
  */
 export function Hero() {
   const stats = site.stats.filter((s) => s.value !== null);
+  // « 3M, Avery Dennison et Hexis »
+  const films = site.filmBrands.join(", ").replace(/, ([^,]*)$/, " et $1");
 
   return (
     <section className="relative overflow-hidden border-b border-line bg-ink">
@@ -32,36 +34,41 @@ export function Hero() {
 
       <Container className="relative z-[2] grid min-h-[78vh] items-center gap-14 pt-[132px] lg:grid-cols-[1.05fr_.95fr]">
         <div>
+          {/*
+            Le H1 porte la requête cible, avec le style de l'eyebrow de la
+            maquette. Le grand titre display n'est qu'un slogan : il passe en
+            <p>, Google lit d'abord « covering voiture & moto à Grenoble ».
+          */}
           <div className="reveal in mb-[26px] inline-flex items-center gap-3">
             <Mark />
-            <span className="font-sans text-[11px] font-bold tracking-[.22em] text-muted-2 italic">
-              ATELIER DE COVERING · {site.city.toUpperCase()}
-            </span>
+            <h1 className="font-sans text-[10px] font-bold tracking-[.12em] whitespace-nowrap text-muted-2 italic sm:text-[11px] sm:tracking-[.22em]">
+              COVERING VOITURE &amp; MOTO À {site.city.toUpperCase()}
+            </h1>
           </div>
 
           {/*
             La maquette écrit `clamp(64px, 8.4vw, 132px)` pour « VOTRE VOITURE, ».
-            « VOTRE VÉHICULE, » est plus long : à cette taille il passait sur
-            deux lignes dans la colonne du desktop. Réduit d'environ un quart
-            pour tenir sur une ligne à toutes les largeurs.
+            « CHANGEZ DE COULEUR, » est plus long encore : réduit pour tenir sur
+            une ligne dans la colonne du desktop. Sur mobile, indexé sur la
+            largeur d'écran (11vw) pour occuper la ligne sans déborder.
           */}
-          <h1 className="h-display text-[clamp(40px,6.2vw,100px)] leading-[.8]">
-            <span className="reveal in block">VOTRE VÉHICULE,</span>
+          <p className="h-display text-[clamp(36px,11vw,64px)] leading-[.8] lg:text-[clamp(36px,5.2vw,84px)]">
+            <span className="reveal in block">CHANGEZ DE COULEUR,</span>
             <span className="reveal in block" style={{ animationDelay: ".1s" }}>
-              UNE AUTRE
+              PAS DE
             </span>
             <span className="reveal in block text-dim-2" style={{ animationDelay: ".1s" }}>
-              COULEUR
+              VÉHICULE
             </span>
-          </h1>
+          </p>
 
           <p
             className="reveal in mt-8 mb-[34px] max-w-[460px] font-sans text-[16.5px] leading-[1.75] text-muted"
             style={{ animationDelay: ".2s", textWrap: "pretty" }}
           >
-            Changez la couleur de votre véhicule sans toucher à la peinture d&apos;origine. Films
-            posés à la main dans notre atelier près de {site.city}, et retirables le jour où vous
-            changez d&apos;avis.
+            Covering intégral ou partiel pour voiture, moto et utilitaire : changez de couleur sans
+            toucher à la peinture d&apos;origine. Films {films} posés à la main dans notre atelier de {site.address?.city ?? site.city}, aux portes de{" "}
+            {site.city}, et retirables le jour où vous changez d&apos;avis.
           </p>
 
           <div

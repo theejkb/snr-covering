@@ -9,20 +9,23 @@ import { AvantApres } from "@/components/sections/AvantApres";
 import { Methode } from "@/components/sections/Methode";
 import { Atelier } from "@/components/sections/Atelier";
 import { Instagram } from "@/components/sections/Instagram";
+import { Faq } from "@/components/sections/Faq";
 import { Devis } from "@/components/sections/Devis";
+import { faq } from "@/content/faq";
 import {
   JsonLd,
   businessSchema,
   websiteSchema,
   webPageSchema,
   serviceSchema,
+  faqSchema,
 } from "@/lib/schema";
 
-// Title et description repris de la maquette : ils étaient déjà bien écrits.
+// Title et description réécrits sur la requête cible, voir docs/COPYWRITING-SEO.md.
 // Déclarés ici en constantes pour être réutilisés tels quels dans le JSON-LD,
 // une page qui se décrit différemment selon l'endroit brouille les moteurs.
-const TITLE = "Covering auto à Grenoble · SNR Covering | PPF, déchromage, déco";
-const DESCRIPTION = `Atelier de covering à Grenoble : covering total ou partiel, film de protection PPF, déchromage, stickers, kit déco et marquage publicitaire. Devis gratuit${
+const TITLE = `Covering ${site.city} · voiture, moto, PPF | ${site.name}`;
+const DESCRIPTION = `Atelier de covering aux portes de ${site.city} : covering voiture et moto, film PPF, déchromage, kit déco, marquage utilitaire. Devis gratuit${
   site.quoteDelay ? ` sous ${site.quoteDelay}` : ""
 }.`;
 
@@ -43,10 +46,10 @@ export const metadata: Metadata = {
 /**
  * L'ordre des sections suit la maquette `SNR Covering.dc.html` : hero, bandeau,
  * prestations, réalisations, avant/après, méthode, atelier (qui présente aussi
- * Clarisse), Instagram, devis.
+ * Clarisse), Instagram, questions fréquentes, devis.
  *
- * Pas de `FAQPage` dans le balisage : les questions ne sont plus affichées sur
- * la page, et Google interdit de baliser un contenu que le visiteur ne voit pas.
+ * `FAQPage` n'est émis que parce que les questions sont affichées dans la
+ * section `Faq` : Google interdit de baliser un contenu invisible.
  */
 export default function Page() {
   return (
@@ -57,6 +60,7 @@ export default function Page() {
           websiteSchema(),
           webPageSchema({ name: TITLE, description: DESCRIPTION }),
           ...prestations.map(serviceSchema),
+          faqSchema(faq),
         ]}
       />
       <Hero />
@@ -67,6 +71,7 @@ export default function Page() {
       <Methode />
       <Atelier />
       <Instagram />
+      <Faq />
       <Devis />
     </>
   );

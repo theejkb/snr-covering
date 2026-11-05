@@ -50,7 +50,7 @@ const data: Tuile[] = [
     span: 2,
     photo: {
       src: "/images/realisations/toyota-yaris-kit-deco-genshin-impact.jpg",
-      alt: "Pose d'un covering imprimé Genshin Impact sur une Toyota Yaris blanche, en cours à l'atelier",
+      alt: "Pose d'un covering imprimé itasha Genshin Impact sur une Toyota Yaris blanche, à l'atelier de Sassenage près de Grenoble",
       width: 1500,
       height: 2000,
     },
@@ -61,7 +61,7 @@ const data: Tuile[] = [
     span: 1,
     photo: {
       src: "/images/realisations/ducati-supersport-kit-deco-blanc-rouge.jpg",
-      alt: "Ducati SuperSport en kit déco blanc et rouge, coulures rouges et logo diable, vue de profil",
+      alt: "Ducati SuperSport en kit déco moto blanc et rouge, coulures rouges et logo diable, vue de profil",
       width: 360,
       height: 480,
       position: "50% 62%",
@@ -73,7 +73,7 @@ const data: Tuile[] = [
     span: 1,
     photo: {
       src: "/images/realisations/yamaha-mt07-covering-reservoir-cameleon.jpg",
-      alt: "Yamaha MT-07, réservoir en film caméléon violet et vert avec logo blanc",
+      alt: "Yamaha MT-07, covering moto du réservoir en film caméléon violet et vert avec logo blanc",
       width: 1500,
       height: 2000,
     },
@@ -85,7 +85,7 @@ const data: Tuile[] = [
     span: 1,
     photo: {
       src: "/images/realisations/utilitaire-marquage-logo-mls.jpg",
-      alt: "Portière d'un camion gris anthracite marquée du blason MLS en blanc",
+      alt: "Marquage publicitaire d'utilitaire : portière de camion gris anthracite marquée du blason MLS en blanc",
       width: 360,
       height: 624,
       position: "50% 76%",
@@ -97,7 +97,7 @@ const data: Tuile[] = [
     span: 1,
     photo: {
       src: "/images/realisations/subaru-impreza-covering-bicolore-violet.jpg",
-      alt: "Subaru Impreza break en covering bicolore violet et argent, jantes rouges, à l'atelier",
+      alt: "Subaru Impreza break en covering bicolore violet et argent, jantes rouges, à l'atelier près de Grenoble",
       width: 1500,
       height: 2000,
     },
@@ -120,7 +120,7 @@ const data: Tuile[] = [
     span: 1,
     photo: {
       src: "/images/realisations/hydrocureur-marquage-publicitaire.jpg",
-      alt: "Citerne d'hydrocureur blanche marquée « Assainissement & Maintenance », à l'atelier",
+      alt: "Marquage publicitaire sur la citerne blanche d'un hydrocureur, « Assainissement & Maintenance »",
       width: 360,
       height: 480,
     },

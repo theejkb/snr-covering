@@ -47,7 +47,7 @@ export function Atelier() {
         </div>
 
         <div>
-          <Eyebrow>QUI SE CACHE DERRIÈRE {site.name.toUpperCase()} ?</Eyebrow>
+          <Eyebrow>VOTRE POSEUSE DE COVERING À {ville.toUpperCase()}</Eyebrow>
           <h2 className="h-display mb-[22px] text-[clamp(40px,6vw,72px)] leading-[.9]">
             MOI, C&apos;EST CLARISSE
           </h2>
@@ -55,17 +55,19 @@ export function Atelier() {
             <p>
               23 ans, passionnée depuis toujours par l&apos;univers du sport mécanique et tout ce
               qui touche aux véhicules. J&apos;ai fait de cette passion mon métier : de la création
-              graphique à la pose, j&apos;aime donner vie aux idées de mes clients. Covering, kit
-              déco, stickers, marquage publicitaire,{" "}
+              graphique à la pose, j&apos;aime donner vie aux idées de mes clients. Depuis 2024, plus
+              de 50 véhicules habillés, et chaque création est dessinée par moi, de la maquette à la
+              pose : kit déco, itasha, logo. Covering, stickers, marquage publicitaire,{" "}
               <strong className="font-semibold text-bright">
                 chaque projet est l&apos;occasion de créer quelque chose d&apos;unique.
               </strong>
             </p>
             <p>
-              Je travaille dans un grand atelier à {ville}, près de {site.city}, partagé avec trois
-              autres poseurs professionnels : plusieurs savoir-faire réunis au même endroit, et la
-              possibilité de collaborer sur certains projets. Du simple sticker au covering
-              complet, sur voitures, utilitaires et deux-roues, en atelier ou directement sur site,
+              Je travaille dans un grand atelier à {ville}, à quelques minutes de {site.city},
+              partagé avec trois autres poseurs professionnels : plusieurs savoir-faire réunis au
+              même endroit, et la possibilité de collaborer sur certains projets. Du simple sticker
+              au covering complet, sur voitures, motos et utilitaires, en atelier sur rendez-vous ou
+              directement sur site : {site.areaServed.filter((c) => c !== ville).join(", ")} et
               partout en France.
             </p>
             <p className="font-semibold text-bright">

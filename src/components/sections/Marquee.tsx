@@ -1,13 +1,17 @@
 import { site } from "@/config/site";
 
-/** Les cinq libellés de la maquette, dans l'ordre, puis le marquage publicitaire. */
+/**
+ * Libellés de la maquette, reformulés sur les requêtes réellement tapées
+ * (« covering intégral », « film PPF »…) plutôt qu'en anglicismes.
+ */
 const labels = [
-  "COVERING FULL",
-  "PPF PROTECTION",
+  "COVERING INTÉGRAL",
+  "COVERING MOTO",
+  "FILM PPF",
   "DÉCHROMAGE",
-  "KIT DÉCO PERSO",
-  "STICKERS",
-  "MARQUAGE PUBLICITAIRE",
+  "KIT DÉCO",
+  "STICKERS & LETTRAGE",
+  "MARQUAGE UTILITAIRE",
 ];
 
 /**

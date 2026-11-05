@@ -16,6 +16,7 @@ import { Logo } from "./ui/Logo";
 const liens = [
   { href: "/#prestations", label: "Prestations" },
   { href: "/#realisations", label: "Réalisations" },
+  { href: "/#faq", label: "Questions fréquentes" },
   { href: "/#devis", label: "Contact" },
   { href: "/mentions-legales", label: "Mentions légales" },
 ];
@@ -56,6 +57,19 @@ export function Footer() {
         <p className="font-sans text-[11px] tracking-[.05em] text-dim uppercase">
           © {new Date().getFullYear()} {site.name} · {site.city}
         </p>
+
+        {/* NAP (nom, adresse, téléphone) : doit rester identique au caractère
+            près à la fiche Google Business Profile. */}
+        <address className="w-full font-sans text-[11px] leading-[1.7] text-dim not-italic">
+          {site.name} · Covering voiture et moto
+          {site.address
+            ? ` · ${site.address.street}, ${site.address.postalCode} ${site.address.city} (${site.city})`
+            : ` · ${site.city}`}{" "}
+          ·{" "}
+          <a href={`tel:${site.phoneE164}`} className="nav-link">
+            {site.phone}
+          </a>
+        </address>
       </Container>
     </footer>
   );
