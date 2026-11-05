@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 import { ArrowRightIcon, CameraIcon, CheckIcon, XIcon } from "../ui/icons";
 import { CATEGORIES } from "@/content/categories";
 import { envoyerDevis, type DevisState } from "@/app/actions/devis";
@@ -22,7 +21,7 @@ const champ =
  * formulaire ne serait qu'un décor, et le site pas conforme au RGPD.
  */
 export function DevisForm() {
-  const [state, action] = useActionState(envoyerDevis, initial);
+  const [state, action, pending] = useActionState(envoyerDevis, initial);
   const [services, setServices] = useState<string[]>([]);
 
   const bascule = (s: string) =>
@@ -50,7 +49,18 @@ export function DevisForm() {
   }
 
   return (
-    <form action={action} noValidate className="flex flex-col gap-3.5">
+    // `onSubmit` plutôt que `action={action}` : avec `action`, React vide le
+    // formulaire après chaque envoi, y compris quand le serveur renvoie une
+    // erreur. Le visiteur perdrait tout ce qu'il a saisi pour une faute de frappe.
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const donnees = new FormData(e.currentTarget);
+        startTransition(() => action(donnees));
+      }}
+      noValidate
+      className="flex flex-col gap-3.5"
+    >
       <div className="mb-1">
         <p className="font-display text-2xl text-bright italic">VOTRE DEVIS EN 2 MINUTES</p>
         <p className="mt-1 font-sans text-[12px] text-dim">
@@ -134,7 +144,7 @@ export function DevisForm() {
         </p>
       )}
 
-      <Submit />
+      <Submit pending={pending} />
 
       <div className="flex items-start gap-2.5">
         <input
@@ -162,8 +172,7 @@ export function DevisForm() {
   );
 }
 
-function Submit() {
-  const { pending } = useFormStatus();
+function Submit({ pending }: { pending: boolean }) {
   return (
     <button
       type="submit"
@@ -219,8 +228,8 @@ function ChampPhotos({ errors, etat }: { errors?: string[]; etat: DevisState }) 
   const [enCours, setEnCours] = useState(false);
   const [alerte, setAlerte] = useState<string | null>(null);
 
-  // React vide les champs du formulaire après chaque envoi : on recopie les
-  // photos dans le champ caché à chaque changement, et après chaque réponse.
+  // Recopie les photos dans le champ caché à chaque changement. `etat` en
+  // dépendance par sécurité : le champ est resynchronisé après chaque réponse.
   useEffect(() => {
     if (!champCache.current) return;
     const transfert = new DataTransfer();
