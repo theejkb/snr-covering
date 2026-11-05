@@ -15,8 +15,6 @@ import { Photo } from "../ui/Photo";
  */
 export function Hero() {
   const stats = site.stats.filter((s) => s.value !== null);
-  // « 3M, Avery Dennison et Hexis »
-  const films = site.filmBrands.join(", ").replace(/, ([^,]*)$/, " et $1");
 
   return (
     <section className="relative overflow-hidden border-b border-line bg-ink">
@@ -66,9 +64,9 @@ export function Hero() {
             className="reveal in mt-8 mb-[34px] max-w-[460px] font-sans text-[16.5px] leading-[1.75] text-muted"
             style={{ animationDelay: ".2s", textWrap: "pretty" }}
           >
-            Covering intégral ou partiel pour voiture, moto et utilitaire : changez de couleur sans
-            toucher à la peinture d&apos;origine. Films {films} posés à la main dans notre atelier de {site.address?.city ?? site.city}, aux portes de{" "}
-            {site.city}, et retirables le jour où vous changez d&apos;avis.
+            Covering voiture, moto et utilitaire, posé à la main dans notre atelier de{" "}
+            {site.address?.city ?? site.city}, près de {site.city}. Votre peinture d&apos;origine
+            reste intacte dessous.
           </p>
 
           <div
