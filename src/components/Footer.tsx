@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/config/site";
 import { Container } from "./ui/Container";
 import { Logo } from "./ui/Logo";
+import { legalLinks } from "./LegalPage";
 
 /**
  * Pied de page : maquette l. 435-449.
@@ -10,15 +11,16 @@ import { Logo } from "./ui/Logo";
  * contrairement à la navigation du haut qui est en capitales : c'est le
  * contraste voulu par la maquette.
  *
- * « Mentions légales » ne figure pas dans la maquette. Le lien est ajouté :
- * l'identité de l'éditeur et l'hébergeur sont obligatoires (article 6 LCEN).
+ * Les liens légaux ne figurent pas dans la maquette. Ils sont ajoutés :
+ * l'identité de l'éditeur et l'hébergeur sont obligatoires (article 6 LCEN),
+ * l'information RGPD et les CGV doivent être accessibles avant tout contact.
  */
 const liens = [
   { href: "/#prestations", label: "Prestations" },
   { href: "/#realisations", label: "Réalisations" },
   { href: "/#faq", label: "Questions fréquentes" },
   { href: "/#devis", label: "Contact" },
-  { href: "/mentions-legales", label: "Mentions légales" },
+  ...legalLinks,
 ];
 
 export function Footer() {

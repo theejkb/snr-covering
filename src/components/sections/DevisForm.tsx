@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowRightIcon, CameraIcon, CheckIcon, XIcon } from "../ui/icons";
 import { CATEGORIES } from "@/content/categories";
 import { envoyerDevis, type DevisState } from "@/app/actions/devis";
@@ -160,7 +161,11 @@ export function DevisForm() {
           className="cursor-pointer font-sans text-[11px] leading-relaxed text-dim"
         >
           J&apos;accepte que mes coordonnées soient utilisées pour répondre à ma demande. Elles ne
-          servent à rien d&apos;autre et ne sont transmises à personne.
+          servent à rien d&apos;autre et ne sont ni vendues ni cédées. Voir la{" "}
+          <Link href="/politique-de-confidentialite" className="underline underline-offset-2">
+            politique de confidentialité
+          </Link>
+          .
         </label>
       </div>
       <Erreur id="consentement-error" errors={state.fieldErrors?.consentement} />

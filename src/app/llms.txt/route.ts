@@ -57,7 +57,9 @@ export function GET() {
   l.push(`- [Email](mailto:${site.email}) : ${site.email}`);
   l.push(`- [Téléphone](tel:${site.phoneE164}) : ${site.phone}`);
   l.push(`- [Instagram](${site.instagramUrl}) : @${site.instagram}, chantiers publiés au fil de l'eau`);
-  l.push(`- [Mentions légales](${site.url}/mentions-legales) : éditeur, hébergeur, données personnelles`);
+  l.push(`- [Mentions légales](${site.url}/mentions-legales) : éditeur, hébergeur`);
+  l.push(`- [Politique de confidentialité](${site.url}/politique-de-confidentialite) : données personnelles, RGPD`);
+  l.push(`- [Conditions générales de vente](${site.url}/conditions-generales) : devis, paiement, garanties, rétractation`);
   l.push("");
 
   l.push("## Questions fréquentes");

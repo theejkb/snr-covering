@@ -59,13 +59,25 @@ export const site = {
   /** TODO : horaires réels, ou laisser vide pour ne rien afficher */
   openingHours: [] as { days: string[]; opens: string; closes: string }[],
 
-  /** TODO : mentions légales obligatoires (art. 6 LCEN) */
+  /**
+   * Mentions légales (art. 6 LCEN) et informations précontractuelles
+   * (art. L111-1 et L616-1 du Code de la consommation).
+   */
   legal: {
-    siret: "TODO_SIRET",
-    status: "TODO_FORME_JURIDIQUE", // ex. « Entreprise individuelle »
-    director: "TODO_NOM_DU_RESPONSABLE",
-    host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA",
+    siret: "130 935 927 00017",
+    siren: "130 935 927",
+    naf: "74.10Z",
+    status: "Entreprise individuelle (EI)",
+    /**
+     * Prénom et nom de l'entrepreneur. Obligatoires pour une EI : la fiche
+     * SIRENE est en diffusion restreinte, ils ne figurent donc nulle part
+     * ailleurs.
+     */
+    director: "Clarisse SAUNIER",
+    host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis · vercel.com",
     vatNote: "TVA non applicable, art. 293 B du CGI", // à retirer si assujetti
+    /** Date affichée en tête des pages légales. À changer à chaque révision. */
+    updatedAt: "13 novembre 2026",
   },
 
   /**

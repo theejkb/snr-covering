@@ -1,14 +1,15 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
+import { legalLinks } from "@/components/LegalPage";
 
 /**
- * Site en une seule page : une seule URL à déclarer.
+ * L'accueil, plus les pages légales.
  *
  * - Les ancres (`/#covering-…`) n'y figurent pas : Google ne les traite pas
  *   comme des adresses distinctes.
- * - `/mentions-legales` non plus : la page est en `noindex`, l'inscrire au
- *   sitemap enverrait deux consignes contradictoires. Elle reste atteignable
- *   par le lien du pied de page, ce qui suffit.
+ * - Les pages légales sont indexables : les laisser en `noindex` déclenchait
+ *   l'alerte « Exclue par la balise noindex » dans la Search Console, sans rien
+ *   apporter en échange. Elles rassurent aussi un client qui cherche le SIRET.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -18,5 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    ...legalLinks.map((l) => ({
+      url: new URL(l.href, site.url).toString(),
+      changeFrequency: "yearly" as const,
+      priority: 0.2,
+    })),
   ];
 }
