@@ -15,8 +15,12 @@ const labels = [
 ];
 
 /**
- * Bande défilante, décorative : `aria-hidden`, arrêtée sous
- * `prefers-reduced-motion` (voir globals.css).
+ * Bande défilante, décorative : la piste est `aria-hidden`, arrêtée sous
+ * `prefers-reduced-motion` (voir globals.css). Le résumé `sr-only` reste hors
+ * de la zone masquée, sinon les lecteurs d'écran ne le liraient jamais.
+ *
+ * Couleur `dim-2` : contraste 3,2:1 minimum, le seuil des grands textes.
+ * `faint-2` (1,5:1) faisait échouer l'audit de contraste de Lighthouse.
  *
  * La séquence est doublée : c'est ce qui rend la boucle invisible, l'animation
  * translatant la piste d'exactement -50 %. Les étoiles alternent bleu et rose
@@ -26,9 +30,9 @@ export function Marquee() {
   const sequence = [...labels, ...labels];
 
   return (
-    <div aria-hidden className="overflow-hidden border-y border-line bg-ink-alt py-[18px]">
-      <div className="marquee-track">
-        <span className="flex shrink-0 items-center gap-[34px] pr-[34px] font-display text-[26px] tracking-[.06em] text-faint-2 italic">
+    <div className="overflow-hidden border-y border-line bg-ink-alt py-[18px]">
+      <div aria-hidden className="marquee-track">
+        <span className="flex shrink-0 items-center gap-[34px] pr-[34px] font-display text-[26px] tracking-[.06em] text-dim-2 italic">
           {sequence.map((label, i) => (
             <span key={`${label}-${i}`} className="flex shrink-0 items-center gap-[34px]">
               {label}
