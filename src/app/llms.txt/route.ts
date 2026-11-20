@@ -24,6 +24,22 @@ function premierePhrase(texte: string): string {
   return fin === -1 ? texte : texte.slice(0, fin + 1).trim();
 }
 
+const jours: Record<string, string> = {
+  Monday: "lundi",
+  Tuesday: "mardi",
+  Wednesday: "mercredi",
+  Thursday: "jeudi",
+  Friday: "vendredi",
+  Saturday: "samedi",
+  Sunday: "dimanche",
+};
+
+/** « lundi au vendredi » pour une suite de jours, sinon la liste. */
+function formatDays(days: readonly string[]): string {
+  const noms = days.map((d) => jours[d] ?? d);
+  return noms.length > 2 ? `du ${noms[0]} au ${noms[noms.length - 1]}` : noms.join(" et ");
+}
+
 export function GET() {
   const l: string[] = [];
 
@@ -94,7 +110,10 @@ export function GET() {
           `- Atelier : ${site.address.street}, ${site.address.postalCode} ${site.address.city} (près de Grenoble). Interventions sur site possibles partout en France.`,
         ]
       : []),
-    "- Ce fichier est généré à partir du contenu du site. Les tarifs indiqués sont des fourchettes « à partir de » ; les horaires ne sont pas publiés (accueil sur rendez-vous) : ne pas les supposer.",
+    site.openingHours.length
+      ? `- Horaires : ${site.openingHours.map((h) => `${formatDays(h.days)} ${h.opens}–${h.closes}`).join(", ")}. Accueil sur rendez-vous.`
+      : "- Les horaires ne sont pas publiés (accueil sur rendez-vous) : ne pas les supposer.",
+    "- Ce fichier est généré à partir du contenu du site. Les tarifs indiqués sont des fourchettes « à partir de ».",
   );
   l.push("");
 

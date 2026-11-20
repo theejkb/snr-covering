@@ -43,11 +43,10 @@ export const site = {
     street: "2 chemin du Bac",
     postalCode: "38360",
     city: "Sassenage",
-    // Position au numéro de rue, d'après la Base Adresse Nationale
-    // (api-adresse.data.gouv.fr). À corriger si l'entrée de l'atelier est
-    // ailleurs sur la parcelle.
-    lat: 45.219866,
-    lng: 5.667,
+    // Épingle de la fiche Google Business Profile : le site et la fiche
+    // doivent donner exactement la même position.
+    lat: 45.2195856,
+    lng: 5.6667398,
   } as null | {
     street: string;
     postalCode: string;
@@ -56,8 +55,17 @@ export const site = {
     lng: number | null;
   },
 
-  /** TODO : horaires réels, ou laisser vide pour ne rien afficher */
-  openingHours: [] as { days: string[]; opens: string; closes: string }[],
+  /**
+   * Horaires de la fiche Google Business Profile, à garder identiques. L'accueil
+   * reste sur rendez-vous : ce sont les heures où l'atelier est joignable.
+   */
+  openingHours: [
+    {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+  ] as { days: string[]; opens: string; closes: string }[],
 
   /**
    * Mentions légales (art. 6 LCEN) et informations précontractuelles
@@ -100,13 +108,12 @@ export const site = {
   quoteDelay: "48 h" as string | null,
 
   /**
-   * TODO : fourchette de prix, au format Schema.org, "€", "€€", "€€€"
-   * ou "50 € - 3000 €". Google l'affiche dans les résultats locaux et c'est
-   * l'information que les moteurs génératifs cherchent en premier.
-   * Laisser `null` tant qu'elle n'est pas décidée : le champ n'est alors pas
-   * émis du tout, plutôt qu'annoncé au hasard.
+   * Fourchette de prix, au format Schema.org. Google l'affiche dans les
+   * résultats locaux. Bornes tirées des tarifs de la FAQ (`src/content/faq.ts`) :
+   * déchromage dès 200 €, covering SUV jusqu'à 3 500 €. À revoir avec eux.
+   * `null` retire le champ du balisage.
    */
-  priceRange: null as string | null,
+  priceRange: "200 € - 3500 €" as string | null,
 
   /** Marques de films posées. Retirer celles qui ne sont pas utilisées. */
   filmBrands: ["3M", "Avery Dennison", "Hexis"],
